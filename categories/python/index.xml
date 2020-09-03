@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/categories/python/</link>
+    <description>Recent content in python on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 22 Jan 2018 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python-source-one</title>
+      <link>https://xerxesnopt.github.io/post/python-source_chapter-one/</link>
+      <pubDate>Mon, 22 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-source_chapter-one/</guid>
+      <description>&lt;h2 id=&#34;python所有的对象pyobject&#34;&gt;Python所有的对象PyObject&lt;/h2&gt;
+&lt;p&gt;[object.h]&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#815ba4&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#815ba4&#34;&gt;struct&lt;/span&gt; _object {
+  PyObject_HEAD
+} PyObject;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>python-source-two</title>
+      <link>https://xerxesnopt.github.io/post/python-source_chapter_2/</link>
+      <pubDate>Mon, 22 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-source_chapter_2/</guid>
+      <description>&lt;h2 id=&#34;python中的整数对象&#34;&gt;Python中的整数对象&lt;/h2&gt;
+&lt;p&gt;python对象根据对象维护数据的可变现将对象分为“可变（mutable）”对象跟“不可变（immutable）”对象&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PyIntObject&lt;/code&gt; 对象就是一个不可变对象
+创建了一个&lt;code&gt;PyIntObject&lt;/code&gt;后，再也不能改变该对象的值了。（字符串对象也如此）&lt;/p&gt;
+&lt;p&gt;Python中为高效使用整数设置了整数对象池。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>python变量</title>
+      <link>https://xerxesnopt.github.io/post/python-var/</link>
+      <pubDate>Mon, 15 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-var/</guid>
+      <description>&lt;p&gt;Python中，分为可变类型与不可变类型
+这里有一个很简单的例子:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>python yield协程</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-yield/</link>
+      <pubDate>Wed, 20 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-yield/</guid>
+      <description>&lt;p&gt;从语法上看，协程与生成器类似。但是协程中，yield通常出现在表达式的右边（例如， datum = yield）。协程可以从调用方接受数据，如**.send(datum)**方法。要理解协程，需要从根本上把yield视作控制流程的方式。&lt;/p&gt;
+&lt;h2 id=&#34;生成器如何进化为协程&#34;&gt;生成器如何进化为协程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;添加了**.send(&amp;hellip;)**, **.throw(&amp;hellip;)**,**.close()**方法。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python str/byte</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-unicode/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-unicode/</guid>
+      <description>&lt;h2 id=&#34;字符问题&#34;&gt;字符问题&lt;/h2&gt;
+&lt;p&gt;Unicode 标准把字符的标识和具体的字节表述进行了明确区分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字符的标识，即码位，是0-1114111的数字（十进制）&lt;/li&gt;
+&lt;li&gt;编码是在码位与字节序列之间转换时使用的算法。
+把码位转换为字节序列是编码，把字节序列转为码位是解码&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python with管理器</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-with/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-with/</guid>
+      <description>&lt;h2 id=&#34;主要讨论&#34;&gt;主要讨论：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;with 语句和上下文管理器&lt;/li&gt;
+&lt;li&gt;for、while 和try语句的else子句&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python运算符</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-chapter13/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-chapter13/</guid>
+      <description>&lt;h2 id=&#34;python中的运算符重载&#34;&gt;python中的运算符重载&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;不能重载内置类型的运算符&lt;/li&gt;
+&lt;li&gt;不能新建运算符，只能重载现有的&lt;/li&gt;
+&lt;li&gt;is, and, or 和not 不能重载(位运算符可以)&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python迭代</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-iter/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-iter/</guid>
+      <description>&lt;p&gt;Python中，所有的集合都可以迭代。在语言内部中，迭代器主要用于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for循环&lt;/li&gt;
+&lt;li&gt;构建和扩展集合类型&lt;/li&gt;
+&lt;li&gt;逐行遍历文件文本&lt;/li&gt;
+&lt;li&gt;列表推导，字典推导跟集合推导&lt;/li&gt;
+&lt;li&gt;元组拆包&lt;/li&gt;
+&lt;li&gt;调用函数时，用__*__拆包实参&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

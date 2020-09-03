@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>win32汇编(环境搭建) &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="win32汇编(环境搭建)">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/win32-1/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>win32汇编(环境搭建)</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2018-01-02 13:06:01 &#43;0800 &#43;0800">2018-01-02</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e4%ba%8c%e8%bf%9b%e5%88%b6">二进制</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/asm">asm</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="使用virtualbox安装winxp-sp2原版iso">使用virtualbox安装winxp sp2原版iso</h2>
+<p><a href="ed2k://%7Cfile%7Csc_winxp_pro_with_sp2.iso%7C629227520%7C505B810E128351482AF8B83AC4D04FD2%7C/">msdn下载地址</a></p>
+<p>序列号：BX6HT-MDJKW-H2J4X-BX67W-TVVFG</p>
+<h2 id="下载masm32">下载masm32</h2>
+<p>下载好之后直接安装，会在安装目录下生成多个文件。注意bin文件夹。ml.exe 在文件夹中
+可以把其放入系统path中。</p>
+<h2 id="测试环境">测试环境</h2>
+<p>看着比较麻烦，还有下nmake之类的。直接上手撸一个asm文件出来测试.保存为b.asm</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm">            <span style="color:#06b6ef">.386</span>
+            <span style="color:#06b6ef">.model</span> <span style="color:#ef6155">flat</span>,<span style="color:#ef6155">stdcall</span>
+            <span style="color:#06b6ef">option</span> <span style="color:#ef6155">casemap</span>:<span style="color:#ef6155">none</span>
+
+<span style="color:#06b6ef">include</span> <span style="color:#ef6155">C</span>:<span style="color:#ef6155">\</span><span style="color:#ef6155">masm32</span><span style="color:#ef6155">\</span><span style="color:#ef6155">include</span><span style="color:#ef6155">\</span><span style="color:#ef6155">windows.inc</span>   <span style="color:#776e71">; 这里要指定window.inc的路径。这是masm32自己安装的
+</span><span style="color:#776e71"></span><span style="color:#ef6155">include</span> <span style="color:#ef6155">C</span>:<span style="color:#ef6155">\</span><span style="color:#ef6155">masm32</span><span style="color:#ef6155">\</span><span style="color:#ef6155">include</span><span style="color:#ef6155">\</span><span style="color:#ef6155">user32.inc</span>
+<span style="color:#06b6ef">includelib</span> <span style="color:#ef6155">C</span>:<span style="color:#ef6155">\</span><span style="color:#ef6155">masm32</span><span style="color:#ef6155">\</span><span style="color:#ef6155">lib</span><span style="color:#ef6155">\</span><span style="color:#ef6155">user32.lib</span>
+<span style="color:#06b6ef">include</span> <span style="color:#ef6155">C</span>:<span style="color:#ef6155">\</span><span style="color:#ef6155">masm32</span><span style="color:#ef6155">\</span><span style="color:#ef6155">include</span><span style="color:#ef6155">\</span><span style="color:#ef6155">kernel32.inc</span>
+<span style="color:#06b6ef">includelib</span> <span style="color:#ef6155">C</span>:<span style="color:#ef6155">\</span><span style="color:#ef6155">masm32</span><span style="color:#ef6155">\</span><span style="color:#ef6155">lib</span><span style="color:#ef6155">\</span><span style="color:#ef6155">kernel32.lib</span>
+
+
+            <span style="color:#06b6ef">.data</span>
+<span style="color:#06b6ef">szCaption</span>   <span style="color:#ef6155">db</span>  <span style="color:#ef6155">&#34;</span><span style="color:#ef6155">A</span> <span style="color:#ef6155">MessageBox</span> !<span style="color:#ef6155">&#34;</span>,<span style="color:#f99b15">0</span>
+<span style="color:#06b6ef">szText</span>      <span style="color:#ef6155">db</span>  <span style="color:#ef6155">&#34;</span><span style="color:#ef6155">Hello</span>,<span style="color:#ef6155">World</span>  !<span style="color:#ef6155">&#34;</span>,<span style="color:#f99b15">0</span>
+
+
+            <span style="color:#06b6ef">.code</span>
+start:
+<span style="color:#06b6ef">invoke</span> <span style="color:#ef6155">MessageBox</span>,<span style="color:#ef6155">NULL</span>,<span style="color:#ef6155">offset</span> <span style="color:#ef6155">szText</span>,<span style="color:#ef6155">offset</span> <span style="color:#ef6155">szCaption</span>,<span style="color:#ef6155">MB_OK</span>
+<span style="color:#06b6ef">invoke</span> <span style="color:#ef6155">ExitProcess</span>,<span style="color:#ef6155">NULL</span>
+
+
+            <span style="color:#06b6ef">end</span> <span style="color:#ef6155">start</span>
+
+</code></pre></div><p>这里在编译时，使用\c \coff 参数</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ml <span style="color:#f99b15">\c</span> <span style="color:#f99b15">\c</span>off b.asm
+</code></pre></div><p>之后会生成b.obj文件.然后使用link来链接,此时要指定subsystem。防止link1221错误。</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">link /subsystem:window b
+</code></pre></div><p>link 完成后目录下生成了b.exe 这个pe文件.直接执行.发现成功了.</p>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

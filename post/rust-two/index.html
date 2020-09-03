@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Rust学习- Array,Vec,String &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="Rust学习- Array,Vec,String">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/rust-two/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>Rust学习- Array,Vec,String</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2019-01-21 13:06:01 &#43;0800 &#43;0800">2019-01-21</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/rust">Rust</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/language">Language</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="数组-array">数组 Array</h2>
+<ul>
+<li>类型全部是相同的,有个数限制</li>
+<li></li>
+<li>exp:</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#815ba4">fn</span> <span style="color:#06b6ef">main</span>() {
+	<span style="color:#815ba4">let</span> <span style="color:#815ba4">mut</span> array: [<span style="color:#fec418">i32</span>; <span style="color:#f99b15">3</span>] <span style="color:#5bc4bf">=</span> [<span style="color:#f99b15">0</span>;<span style="color:#f99b15">3</span>];
+	array[<span style="color:#f99b15">1</span>] <span style="color:#5bc4bf">=</span> <span style="color:#f99b15">1</span>;
+	array[<span style="color:#f99b15">2</span>] <span style="color:#5bc4bf">=</span> <span style="color:#f99b15">2</span>;
+
+	assert_eq<span style="color:#5bc4bf">!</span> ([<span style="color:#f99b15">1</span>,<span style="color:#f99b15">2</span>], <span style="color:#5bc4bf">&amp;</span>array[<span style="color:#f99b15">1</span>..]);
+	<span style="color:#776e71">// This loop prinsts :0 1 2
+</span><span style="color:#776e71"></span>	<span style="color:#815ba4">for</span> x <span style="color:#815ba4">in</span> <span style="color:#5bc4bf">&amp;</span>array{
+		println<span style="color:#5bc4bf">!</span>(<span style="color:#48b685">&#34;{} &#34;</span>,x);
+    }
+}
+
+</code></pre></div><h2 id="动态数组-vec">动态数组 Vec</h2>
+<ul>
+<li>基于堆内存申请的联系动态数据类型，O(1)时间复杂度的索引，push，pop。</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#776e71">//创建空vec
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> v: Vec<span style="color:#5bc4bf">&lt;</span><span style="color:#fec418">i32</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#5bc4bf">=</span> Vec::new();
+<span style="color:#776e71">//使用宏创建vec
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> v: Vec<span style="color:#5bc4bf">&lt;</span><span style="color:#fec418">i32</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#5bc4bf">=</span> vec<span style="color:#5bc4bf">!</span>[];
+<span style="color:#776e71">//创建包含5个元素的Vec
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> v <span style="color:#5bc4bf">=</span> vec<span style="color:#5bc4bf">!</span>[<span style="color:#f99b15">1</span>, <span style="color:#f99b15">2</span>, <span style="color:#f99b15">3</span>, <span style="color:#f99b15">4</span>, <span style="color:#f99b15">5</span>];
+<span style="color:#776e71">//创建10个零
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> v <span style="color:#5bc4bf">=</span> vec<span style="color:#5bc4bf">!</span>[<span style="color:#f99b15">0</span>, <span style="color:#f99b15">10</span>];
+<span style="color:#776e71">//创建可变的Vec 压入元素3
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> <span style="color:#815ba4">mut</span> v <span style="color:#5bc4bf">=</span> vec<span style="color:#5bc4bf">!</span>[<span style="color:#f99b15">1</span>, <span style="color:#f99b15">2</span>];
+v.push(<span style="color:#f99b15">3</span>);
+<span style="color:#776e71">//可变Vec v pop一个值
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> <span style="color:#815ba4">mut</span> v <span style="color:#5bc4bf">=</span> vec<span style="color:#5bc4bf">!</span>[<span style="color:#48b685">&#34;1&#34;</span>, <span style="color:#48b685">&#34;2&#34;</span>];
+<span style="color:#815ba4">let</span> two <span style="color:#5bc4bf">=</span> v.pop();
+<span style="color:#776e71">//索引使用，改变vec中的值
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> <span style="color:#815ba4">mut</span> v <span style="color:#5bc4bf">=</span> vec<span style="color:#5bc4bf">!</span>[<span style="color:#f99b15">1</span>, <span style="color:#f99b15">2</span>, <span style="color:#f99b15">3</span>];
+<span style="color:#815ba4">let</span> three <span style="color:#5bc4bf">=</span> v[<span style="color:#f99b15">2</span>];
+v[<span style="color:#f99b15">1</span>] <span style="color:#5bc4bf">=</span> v[<span style="color:#f99b15">1</span>] <span style="color:#5bc4bf">+</span> <span style="color:#f99b15">5</span>;
+</code></pre></div><h2 id="字符串">字符串</h2>
+<p>字符串分为String和str</p>
+<ul>
+<li>&amp;str: <code>[u8]</code>类型的切片形式&amp;[u8]. 大小固定的字符串类型。</li>
+<li>exp :</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#776e71">//字符串面量值
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> hello <span style="color:#5bc4bf">=</span> <span style="color:#48b685">&#34;Hello, world!&#34;</span>;
+<span style="color:#776e71">//其实带类型标识就是
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> hello: <span style="color:#815ba4">&amp;</span>&#39;static <span style="color:#fec418">str</span> <span style="color:#5bc4bf">=</span> <span style="color:#48b685">&#34;Hello, world!&#34;</span>;
+</code></pre></div><ul>
+<li>String: vec:Vec<!-- raw HTML omitted -->的结构体。也有push 跟pop</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"> <span style="color:#776e71">//创建一个空的字符串
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> <span style="color:#815ba4">mut</span> s <span style="color:#5bc4bf">=</span> String::new();
+<span style="color:#776e71">//从`&amp;str` 类型转为`String`类型
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> <span style="color:#815ba4">mut</span> hello <span style="color:#5bc4bf">=</span> String::from(<span style="color:#48b685">&#34;Hello, &#34;</span>);
+<span style="color:#776e71">//压入字符和压入字符串切片
+</span><span style="color:#776e71"></span>hello.push(<span style="color:#48b685">&#39;w&#39;</span>);
+hello.push_str(<span style="color:#06b6ef">&#39;orld</span><span style="color:#5bc4bf">!</span><span style="color:#ef6155">&#39;</span>);
+<span style="color:#776e71">//弹出字符
+</span><span style="color:#776e71"></span><span style="color:#815ba4">let</span> <span style="color:#815ba4">mut</span> s <span style="color:#5bc4bf">=</span> String::from(<span style="color:#48b685">&#34;foo&#34;</span>);
+assert_eq<span style="color:#5bc4bf">!</span>(s.pop(), Some(<span style="color:#48b685">&#39;o&#39;</span>));
+assert_eq<span style="color:#5bc4bf">!</span>(s.pop(), Some(<span style="color:#48b685">&#39;o&#39;</span>));
+assert_eq<span style="color:#5bc4bf">!</span>(s.pop(), Some(<span style="color:#48b685">&#39;f&#39;</span>));
+assert_eq<span style="color:#5bc4bf">!</span>(s.pop(), None);
+</code></pre></div>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

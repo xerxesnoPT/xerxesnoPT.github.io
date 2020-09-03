@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>内网穿透 on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</link>
+    <description>Recent content in 内网穿透 on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 09 Apr 2018 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>frp内网穿透</title>
+      <link>https://xerxesnopt.github.io/post/frp/</link>
+      <pubDate>Mon, 09 Apr 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/frp/</guid>
+      <description>frp使用  上篇文章中讲了使用ssh搭建隧道。git上面有一个go语言的开源项目frp。用来进行专业的内网穿透。 git地址. 支持tcp，udp，http，https协议。  具体操作  首先在我的公网主机A(debian7 64位)上下载frp的release版本。  wget https://github.com/fatedier/frp/releases/download/v0.16.1/frp_0.16.1_linux_amd64.tar.gz  编写配置文件。这边注意到frp分为frps跟frpc。看名字就知道。A上使用server端.  vim frps.ini
+[common] bind_port = 7000 /这里表示绑定的端口 dashboard_port = 7500 /这里的是frp网页服务的端口。 dashboard_user = xxxx /frp网页服务的账号 dashboard_pwd = xxxx /..密码 之后开启服务
+./frps -c frps.ini   客户端（需要内网穿透）的主机B的设置。使用的是树莓派3b。
+  下载arm版本的frp首先
+  编写配置文件。此时使用的是frpc
+  vim frpc.ini
+[common] server_addr = x.x.x.x /公网ip地址 server_port = 7000 /公网主机A服务端绑定的端口7000 [ssh] type = tcp /使用tcp。可以看下stcp。更加安全 local_ip = 127.0.0.1 /本地ip映射 local_port = 22 /ssh端口 remote_port = 6000 /绑定到公网ip的端口 use_compression = true 开启服务</description>
+    </item>
+    
+    <item>
+      <title>ssh 隧道搭建</title>
+      <link>https://xerxesnopt.github.io/post/ssh_channel/</link>
+      <pubDate>Thu, 29 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/ssh_channel/</guid>
+      <description>如何连接内网  使用公网ip 创建ssh隧道。   远程端口转发（意思就是把内网A主机的ssh服务端22端口转发到公网主机上）  ssh -CfNg -R 2222(公网ip主机上开启的端口): 127.0.0.1:22(内网A主机的22端口) 162.219.xxx.xxx(公网主机的ip地址)  本地端口转发 （意思就是把公网主机上刚才的2222端口转发到内网主机B的本地端口）  ssh -CfNg -L 4444(内网b主机开启的接受端口): 127.0.0.1:2222(公网主机的端口) 162.219.xxx.xxx(公网主机的ip地址) 完整的链接即是： 内网B:4444-&amp;gt;公网主机:2222 -&amp;gt; 内网A：22 在主机B上
+ssh usename@localhost -p 4444  参数解释  -C：压缩数据传输。 -f ：后台认证用户/密码，通常和-N连用，不用登录到远程主机。 -N ：不执行脚本或命令，通常与-f连用。 -g ：在-L/-R/-D参数中，允许远程主机连接到建立的转发的端口，如果不加这个参数，只允许本地主机建立连接。 -L 本地端口:目标IP:目标端口 -T 不分配 TTY 只做代理用 -q 安静模式，不输出 错误/警告 信息 </description>
+    </item>
+    
+  </channel>
+</rss>

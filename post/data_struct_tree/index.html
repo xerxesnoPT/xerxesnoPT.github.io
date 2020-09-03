@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>数据结构-二叉树 &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="数据结构-二叉树">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/data_struct_tree/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>数据结构-二叉树</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2018-02-02 13:06:01 &#43;0800 &#43;0800">2018-02-02</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84">数据结构</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/struct">struct</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="二叉树的性质">二叉树的性质</h2>
+<ul>
+<li>在二叉树的第i层上至多有<code>2**(i-1)</code>个结点(i&gt;=1).</li>
+</ul>
+<pre><code>即从根节点开始，最多的节点数为1,2,4,8 ...... 
+... 等比数列通项公式 `2*(2**(i-2))`
+</code></pre><ul>
+<li>深度为k的二叉树至多有<code>2**k - 1</code>个结点(k&gt;=1).</li>
+</ul>
+<pre><code>即第一层 2**1 -1 = 1
+  二     2**2 -1 = 1+2
+... 等比数列求和公式  s = 2**k -1
+</code></pre><ul>
+<li>对于任意一棵二叉树T,如果其终端节点数为n0，度为2的节点数为n2，则n0 = n2+1</li>
+</ul>
+<pre><code>推导过程：二叉树中所有节点n = n0+n1+n2 .因为根结点只有分支出去，没有分支进入，所以
+分支总数= 结点总数(n) -1.
+分支总数= n1+2*n2` . 带入
+n0+n1+n2-1 = n1+2*n2
+=&gt;n0=n2+1
+</code></pre><ul>
+<li>具有n个结点的完全二叉树的深度(层数)为<code>[log2 n]+1</code> <input checked="" disabled="" type="checkbox"> 表示不大于x的最大整数</li>
+</ul>
+<pre><code>满二叉树的深度n，则它的节点数k=2**n -1
+所以 n = log2(k+1)
+完全二叉树结点k 的取值范围在2**(n-1)-1&lt; k&lt;= 2**n -1 
+因为k为整数。所以 2**(n-1)&lt;=k&lt;2**n.
+由于n也为整数。n-1&lt;=log2 k&lt;n
+所以n = [log2 k]+1
+</code></pre><ul>
+<li>如果对一棵有n个结点的完全二叉树的结点按层序编号，对任一结点i(1&lt;=i&lt;=n)
+<ol>
+<li>如果i=1，则i是二叉树的根；如果i&gt;1,则父母结点为[i/2]</li>
+<li>如果2i&gt;n, 则结点i无左子结点；否则左子结点为2i。</li>
+<li>如果2i+1&gt;n,则结点i无右子结点；否则右子结点为2i+1。</li>
+</ol>
+</li>
+</ul>
+<pre><code>很好理解，用公比为2的等比数列看就行了。
+</code></pre><h2 id="二叉树的存储结构">二叉树的存储结构</h2>
+<ul>
+<li>顺序存储结构：</li>
+</ul>
+<p>直接使用一维数组。一般只适用于完全二叉树结构。</p>
+<ul>
+<li>二叉链表:</li>
+</ul>
+<p>一个数据域和两个指针域</p>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

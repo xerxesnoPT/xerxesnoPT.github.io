@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>win32-api &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="win32-api">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/win32-api/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>win32-api</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2018-01-02 13:06:01 &#43;0800 &#43;0800">2018-01-02</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e4%ba%8c%e8%bf%9b%e5%88%b6">二进制</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/asm">asm</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="api-函数返回值">API 函数返回值</h2>
+<p>Win32 API 返回值类型是一个dword。永远放在eax中。如果放不下，则eax中返回一个指针，或者提供一个缓存区地址。直接把数据返回到缓冲区中</p>
+<h2 id="函数声明">函数声明</h2>
+<p>格式：
+函数名 proto [距离] [语言] [参数1]:数据类型,[参数2]:数据类型,&hellip;&hellip;</p>
+<p>[]中的东西都可以省略</p>
+<p>exp:
+MessageBox Proto :dword,:dword,:dword,:dword</p>
+<p>注意：
+MessageBox 在User32.dll中有两个MessageBoxA(ANSI字符串), MessageBoxW(Unicode字符串)</p>
+<h2 id="标号">标号</h2>
+<p>2种格式</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#ef6155">标号名:</span>  <span style="color:#ef6155">目的指令</span>
+
+
+<span style="color:#ef6155">标号名::</span> <span style="color:#ef6155">目的指令</span>
+</code></pre></div><p>win32汇编中，使用<code>::</code>来表示全局标号.可以从一个子程序直接跳转进入</p>
+<p><code>:</code>表示局部标号，在一个子程序中有效</p>
+<p><code>@@</code>标号。</p>
+<ul>
+<li><code>@F</code>表示本条指令后的第一个<code>@@</code>标号.</li>
+<li><code>@B</code>表示本条指令前&hellip;</li>
+</ul>
+<h2 id="局部变量">局部变量</h2>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#06b6ef">push</span> <span style="color:#ef6155">ebp</span>    <span style="color:#776e71">;栈底ebp入栈保存
+</span><span style="color:#776e71"></span><span style="color:#ef6155">mov</span> <span style="color:#ef6155">ebp</span>,<span style="color:#ef6155">esp</span>  <span style="color:#776e71">; 把栈底设置为栈顶(设置子程序栈底)
+</span><span style="color:#776e71"></span><span style="color:#ef6155">add</span> <span style="color:#ef6155">esp</span>, <span style="color:#ef6155">fffffff8</span> <span style="color:#776e71">; 栈指针往上提升8个字节（可以看做在原来的栈中往上延伸一个新栈，用来存放子程序）
+</span><span style="color:#776e71"></span><span style="color:#ef6155">mov</span> <span style="color:#ef6155">eax</span>, <span style="color:#ef6155">dword</span> <span style="color:#ef6155">ptr</span> [<span style="color:#ef6155">ebp-04</span>] <span style="color:#776e71">;第一个局部变量入栈
+</span><span style="color:#776e71"></span><span style="color:#ef6155">mov</span> <span style="color:#ef6155">ax</span>, <span style="color:#ef6155">word</span> <span style="color:#ef6155">ptr</span> [<span style="color:#ef6155">ebp-06</span>] <span style="color:#776e71">;第二个
+</span><span style="color:#776e71"></span><span style="color:#ef6155">mov</span> <span style="color:#ef6155">al</span>, <span style="color:#ef6155">byte</span> <span style="color:#ef6155">ptr</span> [<span style="color:#ef6155">ebp-07</span>] <span style="color:#776e71">;第三个
+</span><span style="color:#776e71"></span>
+<span style="color:#06b6ef">leave</span> <span style="color:#776e71">; leave 相当于2个操作 mov esp,ebp              pop ebp  此时堆栈就返回了一开始的状态。
+</span><span style="color:#776e71"></span><span style="color:#ef6155">ret</span>
+</code></pre></div><h2 id="charles-simonyi">Charles Simonyi</h2>
+<p>b       byte
+w       word
+dw      dword
+h       handle
+lp      long point
+sz      str end with zero
+lpsz    long point point to sz
+f       float
+st      struct</p>
+<h2 id="获取模块api">获取模块api</h2>
+<p><code>invoke GetModuleHandle, lpModuleName</code></p>
+<p>lpmodulename is the str name of the ModuleHandle</p>
+<p>like</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm">
+<span style="color:#06b6ef">szUserDll</span>   <span style="color:#ef6155">db</span>      <span style="color:#ef6155">&#39;</span><span style="color:#ef6155">User32.dll</span><span style="color:#ef6155">&#39;</span>,<span style="color:#f99b15">0</span>
+            <span style="color:#06b6ef">...</span>
+            <span style="color:#06b6ef">invoke</span>  <span style="color:#ef6155">Getmodulehandle</span>, <span style="color:#ef6155">addr</span>   <span style="color:#ef6155">szUserDll</span>
+            <span style="color:#06b6ef">.if</span>     <span style="color:#ef6155">eax</span>
+                    <span style="color:#06b6ef">mov</span> <span style="color:#ef6155">hUserDllHandle</span>, <span style="color:#ef6155">eax</span>
+            <span style="color:#06b6ef">.endif</span>
+
+            <span style="color:#06b6ef">...</span>
+</code></pre></div><p>if the lpModuleName is NULL, then, we will get the caller&rsquo;s ModuleHandle.</p>
+<p>we use it in source code</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#06b6ef">invoke</span>  <span style="color:#ef6155">Getmodulehandle</span>, <span style="color:#ef6155">NULL</span>
+<span style="color:#06b6ef">mov</span>     <span style="color:#ef6155">hInstance</span>, <span style="color:#ef6155">eax</span>
+</code></pre></div><h2 id="what-is-handle">what is handle</h2>
+<p>handle is just a number for Windows using.</p>
+<h2 id="create-windows">create windows</h2>
+<ul>
+<li>register windows class</li>
+</ul>
+<p><code>invoke RegisterClassEx, addr @stWndClass</code></p>
+<p>args define in a struct named WNDCLASSEX.</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#06b6ef">WNDCLASSEX</span>      <span style="color:#ef6155">STRUCT</span>
+<span style="color:#06b6ef">cbsize</span>          <span style="color:#ef6155">DWORD</span>           <span style="color:#776e71">; length of the struct
+</span><span style="color:#776e71"></span><span style="color:#ef6155">style</span>           <span style="color:#ef6155">...</span>             <span style="color:#776e71">; style
+</span><span style="color:#776e71"></span><span style="color:#ef6155">lpfnwndproc</span>     <span style="color:#ef6155">...</span>             <span style="color:#776e71">; 
+</span><span style="color:#776e71"></span><span style="color:#ef6155">cbclsextra</span>
+<span style="color:#06b6ef">cbwndextra</span>
+<span style="color:#06b6ef">hinstance</span>       <span style="color:#ef6155">...</span>             <span style="color:#776e71">; instance handle
+</span><span style="color:#776e71"></span><span style="color:#ef6155">hicon</span>           <span style="color:#ef6155">...</span>             <span style="color:#776e71">; pic of the window
+</span><span style="color:#776e71"></span><span style="color:#ef6155">hcursor</span>
+<span style="color:#06b6ef">hbrbackground</span>
+<span style="color:#06b6ef">lpszmenunamne</span>   <span style="color:#ef6155">...</span>             <span style="color:#776e71">; windows menu
+</span><span style="color:#776e71"></span><span style="color:#ef6155">lpszclassname</span>   <span style="color:#ef6155">...</span>             <span style="color:#776e71">; address of the show str
+</span><span style="color:#776e71"></span><span style="color:#ef6155">hiconsm</span>
+<span style="color:#06b6ef">WNDCLASSEX</span>      <span style="color:#ef6155">ENDS</span>
+</code></pre></div><ul>
+<li>create windows</li>
+</ul>
+<p><code>invoke CreateWindowEx, dwExStyle, lpClassName,lpWindowName,dwStyle,x,y,nWidth,nHeight,hWndParent,\ hMenu,hInstance,lpParam</code></p>
+<h2 id="message-loop">message loop</h2>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm">    <span style="color:#06b6ef">.while</span>  <span style="color:#ef6155">TRUE</span>
+            <span style="color:#06b6ef">invoke</span>  <span style="color:#ef6155">GetMessage</span>, <span style="color:#ef6155">addr</span> <span style="color:#ef6155">@</span><span style="color:#ef6155">stMsg</span>,<span style="color:#ef6155">NULL</span>,<span style="color:#f99b15">0</span>,<span style="color:#f99b15">0</span>
+            <span style="color:#06b6ef">.break</span>  <span style="color:#ef6155">.if</span> <span style="color:#ef6155">eax</span> <span style="color:#ef6155">==</span> <span style="color:#f99b15">0</span>
+            <span style="color:#06b6ef">invoke</span>  <span style="color:#ef6155">TranslateMessage</span>, <span style="color:#ef6155">addr</span> <span style="color:#ef6155">@</span><span style="color:#ef6155">stMsg</span>
+            <span style="color:#06b6ef">invoke</span>  <span style="color:#ef6155">DispatchMessage</span>, <span style="color:#ef6155">addr</span> <span style="color:#ef6155">@</span><span style="color:#ef6155">stMsg</span>
+    <span style="color:#06b6ef">.endw</span>
+
+
+<span style="color:#06b6ef">MSG</span> <span style="color:#ef6155">STRUCT</span>
+    <span style="color:#06b6ef">hwnd</span>        <span style="color:#ef6155">DWORD</span>       <span style="color:#ef6155">?</span>
+    <span style="color:#06b6ef">message</span>     <span style="color:#ef6155">DWORD</span>       <span style="color:#ef6155">?</span>
+    <span style="color:#06b6ef">wParam</span>      <span style="color:#ef6155">DWORD</span>       <span style="color:#ef6155">?</span>
+    <span style="color:#06b6ef">lParam</span>      <span style="color:#ef6155">DWORD</span>       <span style="color:#ef6155">?</span>
+    <span style="color:#06b6ef">time</span>        <span style="color:#ef6155">DWORD</span>       <span style="color:#ef6155">?</span>
+    <span style="color:#06b6ef">pt</span>          <span style="color:#ef6155">POINT</span>       <span style="color:#ef6155">&lt;&gt;</span>
+
+<span style="color:#06b6ef">MSG</span> <span style="color:#ef6155">ENDS</span>
+</code></pre></div><p><code>invoke GetMessage, lpMsg, hWnd, wMsgFilterMin,wMsgFilterMax</code></p>
+<h2 id="windows-process">windows process</h2>
+<p>the address of the process is important.</p>
+<p>code style:</p>
+<p><code>WindowProc proc    hwnd,uMsg,wParam,lParam</code></p>
+<h2 id="附注">附注：</h2>
+<p>这里记录下。在xp sp2中 shellcode 使用\x00b构造时候会有错误.
+情况是这样. 查看user32.dll 中的messageboxa 函数.得到地址为77d10000+0004050b
+在shellcode时 直接mov eax, 77d5050b 的机器码为b8 0b 05 d5 77 。 进行栈溢出测试时会发现b8后的数据被改为00 cc &hellip; 这样。 最后只好使用meeeageboxa函数下的一个另一个函数地址。弹窗才可以显示。</p>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>柯里化 &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="柯里化">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/curried-function/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>柯里化</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-11-01 13:06:01 &#43;0800 &#43;0800">2017-11-01</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/haskell">haskell</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/hl%e5%9f%ba%e7%a1%80%e8%af%ad%e6%b3%95">hl基础语法</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="柯里化">柯里化</h2>
+<p>haskell 趣学指南中在高阶函数这一章中提出了柯里化概念。
+举例<code>max</code>函数
+首先看<code>max</code>函数的类型</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#06b6ef">max</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">Ord</span> a <span style="color:#5bc4bf">=&gt;</span> a <span style="color:#5bc4bf">-&gt;</span> a <span style="color:#5bc4bf">-&gt;</span> a
+</code></pre></div><p>按照以前haskell中的方式来讲。
+<code>max</code>这个函数需要2个a类型的参数.然后返回一个a类型的值.<code>max 4 5</code>中,4跟5就是参数.返回较大者5.
+看下<code>max 4</code>的类型</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#06b6ef">max</span> <span style="color:#f99b15">4</span> <span style="color:#5bc4bf">::</span> (<span style="color:#fec418">Num</span> a, <span style="color:#fec418">Ord</span> a) <span style="color:#5bc4bf">=&gt;</span> a<span style="color:#5bc4bf">-</span> <span style="color:#5bc4bf">&gt;</span>a
+</code></pre></div><p>需要一个a类型（Ord跟Num的成员），返回一个a类型的值。</p>
+<p>所有其实</p>
+<p>max :: Ord a=&gt; a -&gt; a-&gt; a 可以看做max :: Ord a=&gt;a -&gt;(a-&gt;a)</p>
+<p>即<code>max 4</code>返回一个函数.该函数需要一个a类型的参数,返回a类型的值.</p>
+<p><code>max 4</code> 可以看做f (a, b)中a=4 .然后传入b的调用.</p>
+<p>简而言之.</p>
+<p>柯里化：在直观上。 f (x,y) = x+y.我们把x固定为4然后返回。就成了f (4,y) = 4+y .这个函数。此时只要考虑传入y即可。
+python中的functools.partial（）函数就是这么用的。 廖雪峰教程中管它叫偏函数来着。</p>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

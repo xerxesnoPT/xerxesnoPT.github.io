@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Language on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/language/</link>
+    <description>Recent content in Language on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 21 Jan 2019 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/language/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rust学习- Array,Vec,String</title>
+      <link>https://xerxesnopt.github.io/post/rust-two/</link>
+      <pubDate>Mon, 21 Jan 2019 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/rust-two/</guid>
+      <description>数组 Array  类型全部是相同的,有个数限制  exp:  fn main() { let mut array: [i32; 3] = [0;3]; array[1] = 1; array[2] = 2; assert_eq! ([1,2], &amp;amp;array[1..]); // This loop prinsts :0 1 2 	for x in &amp;amp;array{ println!(&amp;#34;{} &amp;#34;,x); } } 动态数组 Vec  基于堆内存申请的联系动态数据类型，O(1)时间复杂度的索引，push，pop。  //创建空vec let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); //使用宏创建vec let v: Vec&amp;lt;i32&amp;gt; = vec![]; //创建包含5个元素的Vec let v = vec![1, 2, 3, 4, 5]; //创建10个零 let v = vec!</description>
+    </item>
+    
+    <item>
+      <title>Rust学习-1 配置环境</title>
+      <link>https://xerxesnopt.github.io/post/rust-one/</link>
+      <pubDate>Mon, 21 Jan 2019 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/rust-one/</guid>
+      <description>Rust 下载  直接参照官网 讲下Cargo。感觉跟pipenv 相似.会创建一个Cargo.toml文件用于描述项目的依赖  [package] name = &amp;#34;guessing_game&amp;#34; version = &amp;#34;0.1.0&amp;#34; authors = [&amp;#34;xerxes&amp;#34;] edition = &amp;#34;2018&amp;#34; [dependencies] rand = &amp;#34;0.3.14&amp;#34; cargo new [project] : 创建project目录 cargo build :编译 cargo run : 编译并运行 cargo check : 检查语法 cargo release: 进行版本发布  rustup component: 添加工具链,添加代码格式化插件rustfmt  rustup component add rust-src --toolchain nightly rustup update nightly rustup component add rustfmt rustup component add rls --toolchain nightly rustup component add rust-analysis --toolchain nightly rustup component add rust-src --toolchain nightly rustup default nightly vim 主要配置  首先安装好racer,fmt 进入YCM插件目录进行自动补全的编译  .</description>
+    </item>
+    
+  </channel>
+</rss>

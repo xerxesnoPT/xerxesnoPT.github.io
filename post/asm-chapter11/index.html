@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>asm-标志寄存器 &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="asm-标志寄存器">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/asm-chapter11/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>asm-标志寄存器</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-12-25 13:06:01 &#43;0800 &#43;0800">2017-12-25</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e4%ba%8c%e8%bf%9b%e5%88%b6">二进制</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/asm">asm</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="flag寄存器标志寄存器">flag寄存器（标志寄存器）</h2>
+<ol>
+<li>用来存储相关指令的某些执行结果</li>
+<li>用来为cpu执行相关指令提供行为依据</li>
+<li>用来控制cpu的相关工作方式</li>
+</ol>
+<h2 id="flag寄存器位置标志">flag寄存器位置标志</h2>
+<ul>
+<li>0:CF 进位标志
+用于无符号数，记录了最高有效位向更高位的进位或借位</li>
+<li>2:PF 奇偶标志
+所有bit位中1的个数为偶数，pf=1</li>
+<li>4:AF</li>
+<li>6:ZF 零标志位
+如果上一步操作结果为0，则zf的值为1</li>
+<li>7:SF 符号标志位
+1为负，0为正</li>
+<li>8:TF</li>
+<li>9:IF</li>
+<li>10:DF</li>
+<li>11:OF 溢出标志
+用于有符号数运算时的溢出 8位-128~127 。16位-32768~32767</li>
+</ul>
+<h2 id="adc指令">adc指令</h2>
+<p>是带进位加法指令。
+adc ax,bx 实现的功能是(ax)=(ax)+(bx)+cf
+可以从进位运算来理解</p>
+<h2 id="sbb指令">sbb指令</h2>
+<p>sbb ax,bx 实现的功能是(ax)=(ax)-(bx)-cf</p>
+<h2 id="cmp指令">cmp指令</h2>
+<p>比较指令，其实相当于减法指令，只是不保存结果。而是对flag寄存器产生影响</p>
+<p>格式</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#06b6ef">cmp</span> <span style="color:#ef6155">操作对象</span><span style="color:#f99b15">1</span>,<span style="color:#ef6155">操作对象</span><span style="color:#f99b15">2</span>
+</code></pre></div><h2 id="无符号数比较">无符号数比较</h2>
+<ul>
+<li>je(=) , 等于则转移 , zf=1</li>
+<li>jne(!=) , 不等于则转移 , zf=0</li>
+<li>jb(&lt;) , 低于则转移 , cf=1</li>
+<li>jnb(&gt;=) , 不低于则转移 , cf=0</li>
+<li>ja(&gt;) , 高于则转移 ,  cf=0且zf=0</li>
+<li>jna(&lt;=), 不高于则转移, cf=1 或者zf=1</li>
+</ul>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

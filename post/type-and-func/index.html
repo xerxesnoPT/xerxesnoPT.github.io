@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>类型和函数 &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="类型和函数">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/type-and-func/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>类型和函数</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-11-03 13:06:01 &#43;0800 &#43;0800">2017-11-03</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/haskell">haskell</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/hl%e5%9f%ba%e7%a1%80%e8%af%ad%e6%b3%95">hl基础语法</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="haskell的类型系统">Haskell的类型系统</h2>
+<ul>
+<li>强类型：类型转换必须显示使用类型转换函数。</li>
+<li>静态：不是python这种动态语言。java这样的编译时期就能发现类型不正确的表达式。Haskell提供的typeclass机制提供了大部分动态类型的特点。</li>
+<li>可以通过自动推导得出</li>
+</ul>
+<h2 id="一些常用的基本类型">一些常用的基本类型</h2>
+<ul>
+<li>Char： 单个Unicode字符</li>
+<li>Bool：一个布尔逻辑值。只有2个值。 True和False</li>
+<li>Int：带符号的定长整数</li>
+<li>Integer: 不限长度的带符号整数。对Integer的计算不会造成溢出。因此使用Integer的计算结果更可靠。</li>
+<li>Double：浮点数，长度由机器决定，通常是64位。
+<code>::</code> 这个符号用来标识类型.例如<code>:: T</code> 就是像Haskell表示,exp的类型是T. <code>:: T</code> 就是exp的类型签名。如果一个表达式没有显示地指名类型，它的类型就通过自动推导决定。</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#fec418">:</span><span style="color:#815ba4">type</span> <span style="color:#48b685">&#39;a&#39;</span>
+<span style="color:#48b685">&#39;a&#39;</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">Char</span>
+
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#48b685">&#39;a&#39;</span>            <span style="color:#776e71">-- 自动推导</span>
+<span style="color:#48b685">&#39;a&#39;</span>
+
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#48b685">&#39;a&#39;</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">Char</span>    <span style="color:#776e71">-- 显式签名</span>
+<span style="color:#48b685">&#39;a&#39;</span>
+</code></pre></div><p>类型签名必须正确。</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#48b685">&#39;a&#39;</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">Int</span>     <span style="color:#776e71">-- 试图将一个字符值标识为 Int 类型</span>
+
+<span style="color:#5bc4bf">&lt;</span>interactive<span style="color:#5bc4bf">&gt;:</span><span style="color:#f99b15">7</span><span style="color:#fec418">:</span><span style="color:#f99b15">1</span><span style="color:#fec418">:</span>
+    <span style="color:#fec418">Couldn&#39;t</span> match expected <span style="color:#815ba4">type</span> `<span style="color:#fec418">Int&#39;</span> with actual <span style="color:#815ba4">type</span> `<span style="color:#fec418">Char&#39;</span>
+    <span style="color:#fec418">In</span> the expression<span style="color:#fec418">:</span> <span style="color:#48b685">&#39;a&#39;</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">Int</span>
+    <span style="color:#fec418">In</span> an equation for `it&#39;<span style="color:#fec418">:</span> it <span style="color:#5bc4bf">=</span> <span style="color:#48b685">&#39;a&#39;</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">Int</span>
+</code></pre></div><h2 id="调用函数">调用函数</h2>
+<p>要调用一个函数,首先写出它的名字.后面接函数的参数</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Haskell" data-lang="Haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> odd <span style="color:#f99b15">3</span>
+<span style="color:#fec418">True</span>
+
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> odd <span style="color:#f99b15">6</span>
+<span style="color:#fec418">False</span>
+</code></pre></div><p>注意.函数的参数不需要括号来包围,参数与参数直接直接通过空格来隔开.</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> compare <span style="color:#f99b15">2</span> <span style="color:#f99b15">3</span>
+<span style="color:#fec418">LT</span>
+
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> compare <span style="color:#f99b15">3</span> <span style="color:#f99b15">3</span>
+<span style="color:#fec418">EQ</span>
+
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> compare <span style="color:#f99b15">3</span> <span style="color:#f99b15">2</span>
+<span style="color:#fec418">GT</span>
+</code></pre></div><p>函数应用的优先级比操作符要高.</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> (compare <span style="color:#f99b15">2</span> <span style="color:#f99b15">3</span>) <span style="color:#5bc4bf">==</span> <span style="color:#fec418">LT</span>
+<span style="color:#fec418">True</span>
+
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> compare <span style="color:#f99b15">2</span> <span style="color:#f99b15">3</span> <span style="color:#5bc4bf">==</span> <span style="color:#fec418">LT</span>
+<span style="color:#fec418">True</span>
+</code></pre></div><h2 id="复合数据类型列表和元组">复合数据类型:列表和元组</h2>
+<p>复合类型通过其他类型构建得出.Haskell中最常用的是复合类型数据是列表跟元组.</p>
+<ul>
+<li>String 是[char]的别名,[Char]表示由Char类型组成的列表.
+因为列表中的值可以是任意类型,所以列表是类型多态的.当编写带有多态类型的代码时,需要使用类型变量.这些类型变量用小写字母开头,作为一个占位符,最终被一个具体的类型替代(有点像java的泛型)
+[a] 表示一个&rsquo;类型为a的列表&rsquo;</li>
+<li>元组:跟列表的两个属性相反,元组长度固定,但可以包含不同类型的值.
+Haskell 有一个特殊的类型(),这种类型只有一个值(),它的作用相当于包含零个元素的元组,类似于C语言中的void:</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#fec418">:</span>t ()
+() <span style="color:#5bc4bf">::</span> ()
+</code></pre></div><p>元组通常用于以下两个地方:</p>
+<ul>
+<li>如果一个函数需要返回多个值,可以将这些值包装到一个元组中,然后返回元组作为函数的值.</li>
+<li>当需要使用定长容器,又没必要使用自定义的类型时,就可以使用元组来对值进行包装.</li>
+</ul>
+<h2 id="处理列表和元组的函数">处理列表和元组的函数</h2>
+<ul>
+<li>take和drop.接受两个参数,一个数字n和一个列表l.</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> take <span style="color:#f99b15">2</span> [<span style="color:#f99b15">1</span>, <span style="color:#f99b15">2</span>, <span style="color:#f99b15">3</span>, <span style="color:#f99b15">4</span>, <span style="color:#f99b15">5</span>]
+[<span style="color:#f99b15">1</span>,<span style="color:#f99b15">2</span>]
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> drop <span style="color:#f99b15">2</span> [<span style="color:#f99b15">1</span>, <span style="color:#f99b15">2</span>, <span style="color:#f99b15">3</span>, <span style="color:#f99b15">4</span>, <span style="color:#f99b15">5</span>]
+[<span style="color:#f99b15">3</span>,<span style="color:#f99b15">4</span>,<span style="color:#f99b15">5</span>]
+</code></pre></div><ul>
+<li>fst，snd接受一个二元组作为参数，返回该元组的第一个和第二个元素。</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> fst (<span style="color:#f99b15">1</span>, <span style="color:#48b685">&#39;a&#39;</span>)
+<span style="color:#f99b15">1</span>
+
+<span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> snd (<span style="color:#f99b15">1</span>, <span style="color:#48b685">&#39;a&#39;</span>)
+<span style="color:#48b685">&#39;a&#39;</span>
+</code></pre></div><h2 id="将表达式传给函数">将表达式传给函数</h2>
+<p>Haskell函数应用是左关联的。比如说，表达式a b c d 等同于(((a b) c) d)。要将一个表达式用作另一个表达式的参数。必须显式的使用括号来包围它。</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> head (drop <span style="color:#f99b15">4</span> <span style="color:#48b685">&#34;azety&#34;</span>)
+<span style="color:#48b685">&#39;y&#39;</span>
+</code></pre></div><h2 id="函数类型">函数类型</h2>
+<p>使用 :type命令可以查看函数的类型[缩写形式为：t]</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#fec418">:</span><span style="color:#815ba4">type</span> lines
+<span style="color:#06b6ef">lines</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">String</span> <span style="color:#5bc4bf">-&gt;</span> [<span style="color:#fec418">String</span>]
+</code></pre></div><p>通过类型签名显示，lines函数接受单个字符串，并返回包含字符串值的列表。</p>
+<h2 id="纯度">纯度</h2>
+<p>副作用：假设有某个函数，它读取并返回某个全局变量，如果程序中的其他代码可以修改这个全局变量，那么这个函数的返回值就取决于这个全局变量在某一时刻的值。
+Haskell的函数在默认情况下都是无副作用的。函数的结果只取决于显式传入的参数。
+带副作用的函数称为“不纯（impure）函数”。不带副作用的函数称为“pure函数“
+从类型签名可以看出一个Haskell函数是否带有副作用 -不纯的函数类型签名都以IO开头:</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#fec418">Prelude</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#fec418">:</span><span style="color:#815ba4">type</span> readFile
+<span style="color:#06b6ef">readFile</span> <span style="color:#5bc4bf">::</span> <span style="color:#fec418">FilePath</span> <span style="color:#5bc4bf">-&gt;</span> <span style="color:#fec418">IO</span> <span style="color:#fec418">String</span>
+</code></pre></div><h2 id="haskell源码以及简单函数的定义">Haskell源码，以及简单函数的定义</h2>
+<p>ghci只支持Haskell特性的一个非常受限的子集。因此，将代码写在源码文件里。
+Haskell源码通常以.hs作为后缀.我们创建一个add.hs文件,并将以下定义添加到文件中:</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#776e71">-- file: ch02/add.hs</span>
+<span style="color:#06b6ef">add</span> a b <span style="color:#5bc4bf">=</span> a <span style="color:#5bc4bf">+</span> b
+</code></pre></div><p><code>=</code>号左边的<code>add a b</code>是函数名和函数参数,而右边的<code>a+b</code>则是函数体,符号<code>=</code>表示将左边的名字（函数名和函数参数）定义为右边的表达式（函数体）。
+将add.hs保存后，可以在ghci里通过: load （缩写为：l）载入。然后直接调用add函数即可。
+注意，Haskell里一个函数就是一个单独的表达式，而不是一组陈述。所以不适用return关键字来返回函数值。</p>
+<h2 id="变量">变量</h2>
+<ul>
+<li>在Haskell中，一旦变量绑定了某个表达式，name这个变量的值就不会改变，我们总能用这个变量来指代它所关联的表达式，而且每次都会得到同样的结果</li>
+<li>在声明式语言中，变量的值可能无时无刻都处在改变当中。</li>
+</ul>
+<h2 id="条件求值">条件求值</h2>
+<p>Haskell中的if表达式。
+首先看自己实现的一个drop函数</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#06b6ef">myDrop</span> n xs <span style="color:#5bc4bf">=</span> <span style="color:#815ba4">if</span> n <span style="color:#5bc4bf">&lt;=</span> <span style="color:#f99b15">0</span> <span style="color:#5bc4bf">||</span> null xs
+              <span style="color:#815ba4">then</span> xs
+              <span style="color:#815ba4">else</span> myDrop (n <span style="color:#5bc4bf">-</span> <span style="color:#f99b15">1</span>) (tail xs)
+</code></pre></div><p>if 关键字引入了一个带有三个部分的表达式：</p>
+<ul>
+<li>跟在if之后的是一个Bool类型表达式，是if的条件部分</li>
+<li>then 之后的是另一个表达式。这个表达式表示在if条件为
+True时执行</li>
+<li>else之后的是另一个表达式，在条件部分是False时被执行。</li>
+<li>跟在<code>then</code>跟<code>else</code>之后的表达式称为&quot;分支&rdquo;.不同分支之间的类型必须相同.如果是<code>if True then 1 else &quot;foo&quot; </code>这样的表达式会产生错误，因为两个分支的类型并不相同。</li>
+</ul>
+<h2 id="通过示例了解求值">通过示例了解求值</h2>
+<h3 id="惰性求值">惰性求值</h3>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#06b6ef">isOdd</span> n <span style="color:#5bc4bf">=</span> mod n <span style="color:#f99b15">2</span> <span style="color:#5bc4bf">==</span> <span style="color:#f99b15">1</span>
+</code></pre></div><p>一般而言,使用上面的isOdd函数计算isOdd (2+1),都是先计算2+1 = 3 然后在用isOdd的函数定义来进行判断.
+但是在Haskell中.并不需要先计算出(2+1).只用把这个表达式存在块中.当这个子表达式的值真正被需要时才进行计算.</p>
+<h2 id="haskell里的多态">Haskell里的多态.</h2>
+<p>观察last函数.这个函数返回列表中的最后一个元素,不管列表中元素的类型是int或者string.
+last函数签名:</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#06b6ef">last</span> <span style="color:#5bc4bf">::</span> [a] <span style="color:#5bc4bf">-&gt;</span> a
+</code></pre></div><p>a可以指代任意类型.</p>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

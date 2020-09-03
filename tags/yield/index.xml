@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yield on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/yield/</link>
+    <description>Recent content in yield on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 20 Dec 2017 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/yield/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python yield协程</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-yield/</link>
+      <pubDate>Wed, 20 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-yield/</guid>
+      <description>&lt;p&gt;从语法上看，协程与生成器类似。但是协程中，yield通常出现在表达式的右边（例如， datum = yield）。协程可以从调用方接受数据，如**.send(datum)**方法。要理解协程，需要从根本上把yield视作控制流程的方式。&lt;/p&gt;
+&lt;h2 id=&#34;生成器如何进化为协程&#34;&gt;生成器如何进化为协程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;添加了**.send(&amp;hellip;)**, **.throw(&amp;hellip;)**,**.close()**方法。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

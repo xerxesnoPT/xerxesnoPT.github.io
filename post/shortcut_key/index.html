@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>常用快捷键 &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="常用快捷键">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/shortcut_key/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>常用快捷键</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2018-11-12 13:06:01 &#43;0800 &#43;0800">2018-11-12</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/tools">tools</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/skill">skill</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="tmux">Tmux</h2>
+<ul>
+<li>? : 列出所有帮助信息</li>
+<li>[ : 复制模式, vim操作模式，按下回车确定</li>
+<li>] : 粘贴</li>
+<li>{ : 切换pane</li>
+<li>, : 改变window的名字。</li>
+<li>. : 改变window的编号</li>
+<li>t : 显示时间</li>
+<li>alt+方向键: 调整pane大小.</li>
+<li>q : 显示面板编号</li>
+<li>s :切换session</li>
+</ul>
+<h2 id="spacevim">spacevim</h2>
+<ul>
+<li>[ b: 跳至前一个buffer</li>
+<li>] b: 后一个</li>
+<li>[ l: 跳至前一个错误。</li>
+<li>Tab: 窗口跳转</li>
+<li><!-- raw HTML omitted --> + l p: 查看所有安装的插件</li>
+<li>spc + c + l: 快速注释</li>
+</ul>
+<h2 id="vim命令">vim命令</h2>
+<p>YCM使用python3 只需要把
+<code>let g:ycm_python_binary_path = '/usr/local/bin/python3'</code></p>
+<ul>
+<li>C+n,p : 补全时上下移动</li>
+<li>C+y :选中当前补全代码。按enter会回车</li>
+<li><code>&lt;leader&gt;+;</code>: 自动补全</li>
+<li><code>&lt;leade&gt;+jd</code>: 到函数定义处</li>
+<li>gd: 定位到rust函数定义处</li>
+<li><code>&lt;leader&gt;+gd</code>: rust doc文档</li>
+</ul>
+<p>surround 使用:</p>
+<ul>
+<li>
+<p>ds&rdquo;: 删除 &quot;</p>
+</li>
+<li>
+<p>cs&rdquo;( : 把&quot;换成(</p>
+</li>
+<li>
+<p>cst&rdquo; a : 把&quot;换成<code>&lt;a&gt;</code>标签</p>
+</li>
+<li>
+<p>ysiw&rdquo; : Hello -&gt; &ldquo;Hello&rdquo;</p>
+</li>
+<li>
+<p>yss&rdquo; :添加整行 Hello world -&gt; &ldquo;Hello world&rdquo;</p>
+</li>
+<li>
+<p>ySS&rdquo; :添加整行并换行 Hello world -&gt;</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#48b685">&#34;
+</span><span style="color:#48b685">    Hello world
+</span><span style="color:#48b685">&#34;</span>
+</code></pre></div><ul>
+<li>
+<p>可视模式下S&rdquo; : 添加&rdquo;</p>
+</li>
+<li>
+<p><code>:[rang] copy {address}</code> : 可用<code>:co</code> 或者<code>:t</code>缩写</p>
+</li>
+<li>
+<p><code>:[rang] move {address}</code> : 可用<code>:m</code></p>
+</li>
+<li>
+<p><code>:w !sudo tee%</code>: readonly文件修改</p>
+</li>
+<li>
+<p><code>'&lt;,'&gt;</code>代表高亮区</p>
+</li>
+<li>
+<p>按<code>@:</code> 重复上次使用的<code>:</code>命令.</p>
+</li>
+<li>
+<p><code>:[rang] normal 「命令」</code> : 对指定行执行命令 exp: <code>:%normal A;</code> 每行结尾添加；</p>
+</li>
+<li>
+<p><code>:g/pattern/d</code>: 包含pattern的行删除</p>
+</li>
+<li>
+<p><code>:v/pattern/d</code>: 不包含pattern的行删除</p>
+</li>
+<li>
+<p>复制指定字符的行到寄存器a:</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    :g/pattern/y A 
+    :put a
+</code></pre></div>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

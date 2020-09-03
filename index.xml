@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xerxes blog</title>
+    <link>https://xerxesnopt.github.io/</link>
+    <description>Recent content on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Wed, 02 Sep 2020 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PE-Struct</title>
+      <link>https://xerxesnopt.github.io/post/pe-struct/</link>
+      <pubDate>Wed, 02 Sep 2020 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/pe-struct/</guid>
+      <description>&lt;h2 id=&#34;nt头数据结构&#34;&gt;NT头数据结构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SIGNATURE&lt;/strong&gt;:-&amp;gt; DWORD: 4个字节 50450000h(&amp;lsquo;PE&#39;00)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IMAGE_FILE_HEADER&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IMAGE_OPTIONAL_HEADER32&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>80386寻址方式</title>
+      <link>https://xerxesnopt.github.io/post/80386-address/</link>
+      <pubDate>Sat, 02 Feb 2019 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/80386-address/</guid>
+      <description>实模式 CPU为了兼容，保留了实模式,现代操作系统在刚加电时首先运行在实模式下，然后再切换到保护模式下运行。
+ 逻辑地址：即逻辑上的地址，实模式下由“段基地址+段内偏移”组成；保护模式下由“段选择符+段内偏移”组成。 线性地址：逻辑地址经分段机制后就成线性地址，它是平坦的；如果不启用分页，那么此线性地址即物理地址。 物理地址：线性地址经分页转换后就成了物理地址。  8086 只有16位，地址总线20位。要寻找2的20次方 即1mb地址。16位 2的16次方 64kb远远不够。就使用段寄存器 16位x 10h(16)+16位 = 2的16次方乘以 2的4次方 = 2的20次方 进行寻址。 每个段最大也就64kb.
+保护模式   段寄存器其实保存的是段选择符，而不是段基地址。要通过段选择符来找到实际的段基地址。
+  段选择符16位，0-1位RPL,请求特权级。2位TI TI位0 使用GDT , TI=1 ,LDT. 3-15位表示索引,共13位，索引保护模式下最多可以表示2^13=8192个,再加上2位TI 一共可以有 2x8192=16384个段描述符。由于ebx等都是32位的，所以段内偏移地址最大可达4gb。这样16384x4gb=64tb。最大的逻辑/虚拟地址。
+  段描述符8字节，64位。
+  段选择子结构，16位数字
+  | 1 | 0 | 字节 |7654321076543 2 10| 比特 |-------------|-|--| 占位 | INDEX |T|R | 含义 | |I|P | | | |L | ---------------------   INDEX: GDT或者LDT的索引号</description>
+    </item>
+    
+    <item>
+      <title>Rust学习- Array,Vec,String</title>
+      <link>https://xerxesnopt.github.io/post/rust-two/</link>
+      <pubDate>Mon, 21 Jan 2019 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/rust-two/</guid>
+      <description>数组 Array  类型全部是相同的,有个数限制  exp:  fn main() { let mut array: [i32; 3] = [0;3]; array[1] = 1; array[2] = 2; assert_eq! ([1,2], &amp;amp;array[1..]); // This loop prinsts :0 1 2 	for x in &amp;amp;array{ println!(&amp;#34;{} &amp;#34;,x); } } 动态数组 Vec  基于堆内存申请的联系动态数据类型，O(1)时间复杂度的索引，push，pop。  //创建空vec let v: Vec&amp;lt;i32&amp;gt; = Vec::new(); //使用宏创建vec let v: Vec&amp;lt;i32&amp;gt; = vec![]; //创建包含5个元素的Vec let v = vec![1, 2, 3, 4, 5]; //创建10个零 let v = vec!</description>
+    </item>
+    
+    <item>
+      <title>Rust学习-1 配置环境</title>
+      <link>https://xerxesnopt.github.io/post/rust-one/</link>
+      <pubDate>Mon, 21 Jan 2019 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/rust-one/</guid>
+      <description>Rust 下载  直接参照官网 讲下Cargo。感觉跟pipenv 相似.会创建一个Cargo.toml文件用于描述项目的依赖  [package] name = &amp;#34;guessing_game&amp;#34; version = &amp;#34;0.1.0&amp;#34; authors = [&amp;#34;xerxes&amp;#34;] edition = &amp;#34;2018&amp;#34; [dependencies] rand = &amp;#34;0.3.14&amp;#34; cargo new [project] : 创建project目录 cargo build :编译 cargo run : 编译并运行 cargo check : 检查语法 cargo release: 进行版本发布  rustup component: 添加工具链,添加代码格式化插件rustfmt  rustup component add rust-src --toolchain nightly rustup update nightly rustup component add rustfmt rustup component add rls --toolchain nightly rustup component add rust-analysis --toolchain nightly rustup component add rust-src --toolchain nightly rustup default nightly vim 主要配置  首先安装好racer,fmt 进入YCM插件目录进行自动补全的编译  .</description>
+    </item>
+    
+    <item>
+      <title>常用快捷键</title>
+      <link>https://xerxesnopt.github.io/post/shortcut_key/</link>
+      <pubDate>Mon, 12 Nov 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/shortcut_key/</guid>
+      <description>&lt;h2 id=&#34;tmux&#34;&gt;Tmux&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>debian9-日常</title>
+      <link>https://xerxesnopt.github.io/post/debian9/</link>
+      <pubDate>Fri, 11 May 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/debian9/</guid>
+      <description>Debian9的日常：  开启crontab日志  sudo vim /etc/rsyslog.conf # 去掉cron.* 前面的注释 sudo systemctl restart rsyslog.conf </description>
+    </item>
+    
+    <item>
+      <title>frp内网穿透</title>
+      <link>https://xerxesnopt.github.io/post/frp/</link>
+      <pubDate>Mon, 09 Apr 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/frp/</guid>
+      <description>frp使用  上篇文章中讲了使用ssh搭建隧道。git上面有一个go语言的开源项目frp。用来进行专业的内网穿透。 git地址. 支持tcp，udp，http，https协议。  具体操作  首先在我的公网主机A(debian7 64位)上下载frp的release版本。  wget https://github.com/fatedier/frp/releases/download/v0.16.1/frp_0.16.1_linux_amd64.tar.gz  编写配置文件。这边注意到frp分为frps跟frpc。看名字就知道。A上使用server端.  vim frps.ini
+[common] bind_port = 7000 /这里表示绑定的端口 dashboard_port = 7500 /这里的是frp网页服务的端口。 dashboard_user = xxxx /frp网页服务的账号 dashboard_pwd = xxxx /..密码 之后开启服务
+./frps -c frps.ini   客户端（需要内网穿透）的主机B的设置。使用的是树莓派3b。
+  下载arm版本的frp首先
+  编写配置文件。此时使用的是frpc
+  vim frpc.ini
+[common] server_addr = x.x.x.x /公网ip地址 server_port = 7000 /公网主机A服务端绑定的端口7000 [ssh] type = tcp /使用tcp。可以看下stcp。更加安全 local_ip = 127.0.0.1 /本地ip映射 local_port = 22 /ssh端口 remote_port = 6000 /绑定到公网ip的端口 use_compression = true 开启服务</description>
+    </item>
+    
+    <item>
+      <title>ssh 隧道搭建</title>
+      <link>https://xerxesnopt.github.io/post/ssh_channel/</link>
+      <pubDate>Thu, 29 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/ssh_channel/</guid>
+      <description>如何连接内网  使用公网ip 创建ssh隧道。   远程端口转发（意思就是把内网A主机的ssh服务端22端口转发到公网主机上）  ssh -CfNg -R 2222(公网ip主机上开启的端口): 127.0.0.1:22(内网A主机的22端口) 162.219.xxx.xxx(公网主机的ip地址)  本地端口转发 （意思就是把公网主机上刚才的2222端口转发到内网主机B的本地端口）  ssh -CfNg -L 4444(内网b主机开启的接受端口): 127.0.0.1:2222(公网主机的端口) 162.219.xxx.xxx(公网主机的ip地址) 完整的链接即是： 内网B:4444-&amp;gt;公网主机:2222 -&amp;gt; 内网A：22 在主机B上
+ssh usename@localhost -p 4444  参数解释  -C：压缩数据传输。 -f ：后台认证用户/密码，通常和-N连用，不用登录到远程主机。 -N ：不执行脚本或命令，通常与-f连用。 -g ：在-L/-R/-D参数中，允许远程主机连接到建立的转发的端口，如果不加这个参数，只允许本地主机建立连接。 -L 本地端口:目标IP:目标端口 -T 不分配 TTY 只做代理用 -q 安静模式，不输出 错误/警告 信息 </description>
+    </item>
+    
+    <item>
+      <title>use Heimdall</title>
+      <link>https://xerxesnopt.github.io/post/use_heimdall/</link>
+      <pubDate>Mon, 05 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/use_heimdall/</guid>
+      <description>&lt;h2 id=&#34;下载heimdall&#34;&gt;下载heimdall。&lt;/h2&gt;
+&lt;p&gt;网页提供的版本为1.4.0，download pit的时候会出错。浪费了半天时间。
+解决方法直接去git拉取最新的1.4.2版本，自己编译下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pandoc转换md</title>
+      <link>https://xerxesnopt.github.io/post/md_2_pdf/</link>
+      <pubDate>Fri, 02 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/md_2_pdf/</guid>
+      <description>&lt;h1 id=&#34;markdown-如何转为pdf打印&#34;&gt;markdown 如何转为pdf打印。&lt;/h1&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;直接使用pandoc这个haskell应用&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>nethunter </title>
+      <link>https://xerxesnopt.github.io/post/nethunter/</link>
+      <pubDate>Thu, 01 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/nethunter/</guid>
+      <description>&lt;h1 id=&#34;todo刷入三星s5-nethunter&#34;&gt;TODO:刷入三星S5 nethunter&lt;/h1&gt;
+&lt;h2 id=&#34;准备步骤&#34;&gt;准备步骤：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;下载工具及所需rom：
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://wiki.lineageos.org/adb_fastboot_guide.html&#34;&gt;Linux安装&lt;code&gt;adb&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;下载s5的cm固件，使用kltechn版本的。&lt;a href=&#34;https://download.lineageos.org/kltechn&#34;&gt;下载链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;下载&lt;a href=&#34;http://glassechidna.com.au/heimdall/#downloads&#34;&gt;Heimdall套件&lt;/a&gt;来对三星设备进行recovery的刷入。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dl.twrp.me/kltechn/&#34;&gt;TWRP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://build.nethunter.com/nightly/3.15.4-20170101-0951/&#34;&gt;nethunter roma&lt;/a&gt; 注意，这里内核使用kltechn的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>数据结构-二叉树</title>
+      <link>https://xerxesnopt.github.io/post/data_struct_tree/</link>
+      <pubDate>Fri, 02 Feb 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/data_struct_tree/</guid>
+      <description>&lt;h2 id=&#34;二叉树的性质&#34;&gt;二叉树的性质&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在二叉树的第i层上至多有&lt;code&gt;2**(i-1)&lt;/code&gt;个结点(i&amp;gt;=1).&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python-source-one</title>
+      <link>https://xerxesnopt.github.io/post/python-source_chapter-one/</link>
+      <pubDate>Mon, 22 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-source_chapter-one/</guid>
+      <description>&lt;h2 id=&#34;python所有的对象pyobject&#34;&gt;Python所有的对象PyObject&lt;/h2&gt;
+&lt;p&gt;[object.h]&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#815ba4&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#815ba4&#34;&gt;struct&lt;/span&gt; _object {
+  PyObject_HEAD
+} PyObject;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>python-source-two</title>
+      <link>https://xerxesnopt.github.io/post/python-source_chapter_2/</link>
+      <pubDate>Mon, 22 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-source_chapter_2/</guid>
+      <description>&lt;h2 id=&#34;python中的整数对象&#34;&gt;Python中的整数对象&lt;/h2&gt;
+&lt;p&gt;python对象根据对象维护数据的可变现将对象分为“可变（mutable）”对象跟“不可变（immutable）”对象&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PyIntObject&lt;/code&gt; 对象就是一个不可变对象
+创建了一个&lt;code&gt;PyIntObject&lt;/code&gt;后，再也不能改变该对象的值了。（字符串对象也如此）&lt;/p&gt;
+&lt;p&gt;Python中为高效使用整数设置了整数对象池。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>python变量</title>
+      <link>https://xerxesnopt.github.io/post/python-var/</link>
+      <pubDate>Mon, 15 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-var/</guid>
+      <description>&lt;p&gt;Python中，分为可变类型与不可变类型
+这里有一个很简单的例子:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>win32-api</title>
+      <link>https://xerxesnopt.github.io/post/win32-api/</link>
+      <pubDate>Tue, 02 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/win32-api/</guid>
+      <description>&lt;h2 id=&#34;api-函数返回值&#34;&gt;API 函数返回值&lt;/h2&gt;
+&lt;p&gt;Win32 API 返回值类型是一个dword。永远放在eax中。如果放不下，则eax中返回一个指针，或者提供一个缓存区地址。直接把数据返回到缓冲区中&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>win32汇编(环境搭建)</title>
+      <link>https://xerxesnopt.github.io/post/win32-1/</link>
+      <pubDate>Tue, 02 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/win32-1/</guid>
+      <description>&lt;h2 id=&#34;使用virtualbox安装winxp-sp2原版iso&#34;&gt;使用virtualbox安装winxp sp2原版iso&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;ed2k://%7Cfile%7Csc_winxp_pro_with_sp2.iso%7C629227520%7C505B810E128351482AF8B83AC4D04FD2%7C/&#34;&gt;msdn下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;序列号：BX6HT-MDJKW-H2J4X-BX67W-TVVFG&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>asm-标志寄存器</title>
+      <link>https://xerxesnopt.github.io/post/asm-chapter11/</link>
+      <pubDate>Mon, 25 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/asm-chapter11/</guid>
+      <description>&lt;h2 id=&#34;flag寄存器标志寄存器&#34;&gt;flag寄存器（标志寄存器）&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;用来存储相关指令的某些执行结果&lt;/li&gt;
+&lt;li&gt;用来为cpu执行相关指令提供行为依据&lt;/li&gt;
+&lt;li&gt;用来控制cpu的相关工作方式&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>asm-call,ret跟子程序 </title>
+      <link>https://xerxesnopt.github.io/post/asm-chapter10/</link>
+      <pubDate>Sun, 24 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/asm-chapter10/</guid>
+      <description>&lt;h2 id=&#34;ret&#34;&gt;ret&lt;/h2&gt;
+&lt;p&gt;two steps&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>python yield协程</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-yield/</link>
+      <pubDate>Wed, 20 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-yield/</guid>
+      <description>&lt;p&gt;从语法上看，协程与生成器类似。但是协程中，yield通常出现在表达式的右边（例如， datum = yield）。协程可以从调用方接受数据，如**.send(datum)**方法。要理解协程，需要从根本上把yield视作控制流程的方式。&lt;/p&gt;
+&lt;h2 id=&#34;生成器如何进化为协程&#34;&gt;生成器如何进化为协程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;添加了**.send(&amp;hellip;)**, **.throw(&amp;hellip;)**,**.close()**方法。&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python str/byte</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-unicode/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-unicode/</guid>
+      <description>&lt;h2 id=&#34;字符问题&#34;&gt;字符问题&lt;/h2&gt;
+&lt;p&gt;Unicode 标准把字符的标识和具体的字节表述进行了明确区分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字符的标识，即码位，是0-1114111的数字（十进制）&lt;/li&gt;
+&lt;li&gt;编码是在码位与字节序列之间转换时使用的算法。
+把码位转换为字节序列是编码，把字节序列转为码位是解码&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python with管理器</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-with/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-with/</guid>
+      <description>&lt;h2 id=&#34;主要讨论&#34;&gt;主要讨论：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;with 语句和上下文管理器&lt;/li&gt;
+&lt;li&gt;for、while 和try语句的else子句&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python运算符</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-chapter13/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-chapter13/</guid>
+      <description>&lt;h2 id=&#34;python中的运算符重载&#34;&gt;python中的运算符重载&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;不能重载内置类型的运算符&lt;/li&gt;
+&lt;li&gt;不能新建运算符，只能重载现有的&lt;/li&gt;
+&lt;li&gt;is, and, or 和not 不能重载(位运算符可以)&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>python迭代</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-iter/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-iter/</guid>
+      <description>&lt;p&gt;Python中，所有的集合都可以迭代。在语言内部中，迭代器主要用于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for循环&lt;/li&gt;
+&lt;li&gt;构建和扩展集合类型&lt;/li&gt;
+&lt;li&gt;逐行遍历文件文本&lt;/li&gt;
+&lt;li&gt;列表推导，字典推导跟集合推导&lt;/li&gt;
+&lt;li&gt;元组拆包&lt;/li&gt;
+&lt;li&gt;调用函数时，用__*__拆包实参&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>转移静态BLOG</title>
+      <link>https://xerxesnopt.github.io/post/first/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/first/</guid>
+      <description>&lt;h2 id=&#34;转移原因&#34;&gt;转移原因&lt;/h2&gt;
+&lt;p&gt;由于考虑到平时写文档都是markdown
+使用django后台动态生成比较慢。而且github还有page服务。直接使用静态网站&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>asm-记录01 </title>
+      <link>https://xerxesnopt.github.io/post/asm-8/</link>
+      <pubDate>Fri, 01 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/asm-8/</guid>
+      <description>&lt;h2 id=&#34;伪指令dd&#34;&gt;伪指令dd&lt;/h2&gt;
+&lt;p&gt;定义双字型数据。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>类型和函数</title>
+      <link>https://xerxesnopt.github.io/post/type-and-func/</link>
+      <pubDate>Fri, 03 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/type-and-func/</guid>
+      <description>&lt;h2 id=&#34;haskell的类型系统&#34;&gt;Haskell的类型系统&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;强类型：类型转换必须显示使用类型转换函数。&lt;/li&gt;
+&lt;li&gt;静态：不是python这种动态语言。java这样的编译时期就能发现类型不正确的表达式。Haskell提供的typeclass机制提供了大部分动态类型的特点。&lt;/li&gt;
+&lt;li&gt;可以通过自动推导得出&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>typeclasses</title>
+      <link>https://xerxesnopt.github.io/post/basic-typeclasses/</link>
+      <pubDate>Thu, 02 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/basic-typeclasses/</guid>
+      <description>&lt;p&gt;typeclasses: haskell 中的相当于类型接口的基类。
+在检查&lt;code&gt;==&lt;/code&gt;方法时
+返回&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>定义类型，方法</title>
+      <link>https://xerxesnopt.github.io/post/defining-typesstreamlining-functions/</link>
+      <pubDate>Thu, 02 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/defining-typesstreamlining-functions/</guid>
+      <description>&lt;h2 id=&#34;定义新的数据类型&#34;&gt;定义新的数据类型&lt;/h2&gt;
+&lt;p&gt;使用&lt;code&gt;data&lt;/code&gt;关键字可以定义新的数据类型&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#815ba4&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;BookInfo&lt;/span&gt; &lt;span style=&#34;color:#5bc4bf&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;Book&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;Int&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;String&lt;/span&gt; [&lt;span style=&#34;color:#fec418&#34;&gt;String&lt;/span&gt;]
+                          &lt;span style=&#34;color:#815ba4&#34;&gt;deriving&lt;/span&gt; (&lt;span style=&#34;color:#fec418&#34;&gt;Show&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>柯里化</title>
+      <link>https://xerxesnopt.github.io/post/curried-function/</link>
+      <pubDate>Wed, 01 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/curried-function/</guid>
+      <description>&lt;h2 id=&#34;柯里化&#34;&gt;柯里化&lt;/h2&gt;
+&lt;p&gt;haskell 趣学指南中在高阶函数这一章中提出了柯里化概念。
+举例&lt;code&gt;max&lt;/code&gt;函数
+首先看&lt;code&gt;max&lt;/code&gt;函数的类型&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

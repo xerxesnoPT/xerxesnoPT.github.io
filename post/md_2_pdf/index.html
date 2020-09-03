@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>pandoc转换md &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="pandoc转换md">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/md_2_pdf/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>pandoc转换md</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2018-03-02 13:06:01 &#43;0800 &#43;0800">2018-03-02</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e6%9d%82%e9%a1%b9">杂项</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/markdown">markdown</a>
+       &middot;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/pdf">pdf</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h1 id="markdown-如何转为pdf打印">markdown 如何转为pdf打印。</h1>
+<h2 id="解决方案">解决方案：</h2>
+<ul>
+<li>直接使用pandoc这个haskell应用</li>
+</ul>
+<h2 id="具体操作">具体操作：</h2>
+<ol>
+<li>由于已经安装了haskell。直接使用cabal(相当于python的pip)安装编译。编译pandoc时间蛮久的，耐心等待吧</li>
+</ol>
+<pre><code>cabal update &amp;&amp; cabal install pandoc
+</code></pre><p>注意点：这里可以使用清华的源来代替haskell的源 <a href="https://mirror.tuna.tsinghua.edu.cn/help/hackage/">替换方法</a>
+2. 安装tex发行版（可以理解为编译器吧）。一般linux安装<a href="https://www.tug.org/texlive/">TeXLive</a>,这个比较全一点，但是安装包很大，两三个G 。公司Mac下安装了MikTex。
+3. 查看自己系统可用的中文字体：</p>
+<pre><code>fc-list | grep lang=zh
+</code></pre><p>mac 下直接查看字符集 book.app
+4. 下载tzengyuxio写好的latex模板 。<a href="https://github.com/tzengyuxio/pages/tree/gh-pages/pandoc">github</a><br>
+注意latex模板中的字体要改为系统中的字体。</p>
+<pre><code>\setCJKmain{这里修改要设置的字体}
+</code></pre><p>注意点：由于这个模板比较老。需要在<code>\begin{}</code>前添加一段</p>
+<pre><code>\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+</code></pre><ol start="5">
+<li>直接使用pandoc套用模板进行转换</li>
+</ol>
+<pre><code>pandoc --pdf-engine=xelatex -V CJKmainfont=&quot;STSong&quot; xxx.md -o xxx.pdf --template=yourtemplate.latex
+</code></pre><h2 id="总结">总结</h2>
+<ul>
+<li>latex可以理解为为tex语言的高级封装。</li>
+<li>pandoc 转换中文时需要制定pdf引擎为xelatex</li>
+</ul>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

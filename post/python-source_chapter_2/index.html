@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>python-source-two &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="python-source-two">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/python-source_chapter_2/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>python-source-two</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2018-01-22 13:06:01 &#43;0800 &#43;0800">2018-01-22</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/c">c</a>
+        &middot;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/python">python</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/python">python</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="python中的整数对象">Python中的整数对象</h2>
+<p>python对象根据对象维护数据的可变现将对象分为“可变（mutable）”对象跟“不可变（immutable）”对象</p>
+<p><code>PyIntObject</code> 对象就是一个不可变对象
+创建了一个<code>PyIntObject</code>后，再也不能改变该对象的值了。（字符串对象也如此）</p>
+<p>Python中为高效使用整数设置了整数对象池。</p>
+<p>Python中的整数对象实际上就是对c中原生类型long的一个简单包装。</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[intobject.c]
+PyTypeObject PyInt_Type <span style="color:#5bc4bf">=</span> {
+  PyObject_HEAD_INIT(<span style="color:#5bc4bf">&amp;</span>PyType_Type)
+    <span style="color:#f99b15">0</span>,
+  <span style="color:#48b685">&#34;int&#34;</span>,
+  <span style="color:#815ba4">sizeof</span> (PyIntObject),
+  <span style="color:#f99b15">0</span>,
+  (destructor) int_dealloc,    <span style="color:#776e71">/* tp_dealloc */</span>
+  (printfunc) int_print,        <span style="color:#776e71">/* tp_print */</span>
+  <span style="color:#f99b15">0</span>,                            <span style="color:#776e71">/* tp_getattr */</span>
+  <span style="color:#f99b15">0</span>,                            <span style="color:#776e71">/* tp_setattr */</span>
+  (cmpfunc) int_compare,        <span style="color:#776e71">/* tp_compare */</span>
+  (reprfunc) int_repr,          <span style="color:#776e71">/* tp_repr */</span>
+  <span style="color:#5bc4bf">&amp;</span> int_as_number,          <span style="color:#776e71">/* tp_as_number */</span>
+  <span style="color:#f99b15">0</span>,                          <span style="color:#776e71">/* tp_as_sequence */</span>
+  <span style="color:#f99b15">0</span>,                             <span style="color:#776e71">/* tp_as_mapping */</span>
+  (hashfunc) int_hash ,                        <span style="color:#776e71">/* tp_hash */</span>
+  <span style="color:#f99b15">0</span>,                            <span style="color:#776e71">/* tp_call */</span>
+  (reprfunc) int_repr,          <span style="color:#776e71">/* tp_str */</span>
+  PyObject_GenericGetAttr,      <span style="color:#776e71">/* tp_getattro */</span>
+  <span style="color:#f99b15">0</span>,                            <span style="color:#776e71">/* tp_setattro */</span>
+  <span style="color:#f99b15">0</span>,                            <span style="color:#776e71">/* tp_as_buffer */</span>
+  Py_TPFLAGS_DEFAULT <span style="color:#5bc4bf">|</span> Py_TPFLAGS_CHECKTYPES <span style="color:#5bc4bf">|</span> Py_TPFLAGS_BASETYPES,  <span style="color:#776e71">/* tp_flags */</span>
+  int_doc,                  <span style="color:#776e71">/* tp_doc */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_traverse */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_clear */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_richcompare */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_weaklistoffset */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_iter */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_iternext */</span>
+  int_methods,              <span style="color:#776e71">/* tp_methods */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_members */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_getset */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_base */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_dict */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_descr_get */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_descr_set */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_dictoffset */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_init */</span>
+  <span style="color:#f99b15">0</span>,                        <span style="color:#776e71">/* tp_alloc */</span>
+  int_new,                  <span style="color:#776e71">/* tp_new */</span>
+  (freefunc) int_free       <span style="color:#776e71">/* tp_free */</span>
+};
+</code></pre></div><p>从上面的代码中可以看到<code>PyInt_Type</code>中保存了关于<code>PyIntObject</code>对象的丰富元信息</p>
+<p>exp:如何比较2个整数对象的大小</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[intobject.c]
+<span style="color:#815ba4">static</span> <span style="color:#fec418">int</span> int_compare(PyIntObject <span style="color:#5bc4bf">*</span>v, PyIntObject <span style="color:#5bc4bf">*</span>w)
+{
+  <span style="color:#815ba4">register</span> <span style="color:#fec418">long</span> i <span style="color:#5bc4bf">=</span> v <span style="color:#5bc4bf">-&gt;</span>ob_ival;
+  <span style="color:#815ba4">register</span> <span style="color:#fec418">long</span> j <span style="color:#5bc4bf">=</span> w <span style="color:#5bc4bf">-&gt;</span>ob_ival;
+  retrun (i <span style="color:#5bc4bf">&lt;</span> j) <span style="color:#5bc4bf">?</span> <span style="color:#5bc4bf">-</span><span style="color:#f99b15">1</span> <span style="color:#5bc4bf">:</span> (i <span style="color:#5bc4bf">&gt;</span> j) <span style="color:#5bc4bf">?</span> <span style="color:#f99b15">1</span><span style="color:#5bc4bf">:</span> <span style="color:#f99b15">0</span>;
+}
+</code></pre></div><ul>
+<li>实际上就是比较2个整数对象所维护的long值。</li>
+</ul>
+<p>exp：来看看<code>int_as_number</code>这个域：</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[intobject.c]
+<span style="color:#815ba4">static</span> PyNumberMethods int_as_number <span style="color:#5bc4bf">=</span> {
+  (binaryfunc) int_add,     <span style="color:#776e71">/* nb_add */</span>
+  (binaryfunc) int_sub,   <span style="color:#776e71">/* nb_subtract */</span>
+  .....
+  (binaryfunc) int_div,     
+  int_true_divide,
+  <span style="color:#f99b15">0</span>,
+  <span style="color:#f99b15">0</span>,
+};
+</code></pre></div><ul>
+<li><code>PyNumberMethods</code> 中定义了一个对象作为数值对象时的所有可选操作信息,一共有39个函数指针</li>
+<li><code>int_as_number</code> 中确定了对于一个整数对象这些数值操作应该怎么进行。当然,并非所有函数都要被实现。</li>
+<li>查看<code>PyIntObject</code>中加法的实现</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">[intobject.h]
+<span style="color:#776e71">// macro 牺牲类型安全，换取执行效率
+</span><span style="color:#776e71"></span><span style="color:#776e71">#define PyInt_AS_LONG(op) (((PyIntObject *)(op)) -&gt; ob_ival)
+</span><span style="color:#776e71"></span>
+[intobject.c]
+<span style="color:#776e71">#define CONVERT_TO_LONG(obj, lng)  \
+</span><span style="color:#776e71">  if (PyInt_Check(obj)) {       \
+</span><span style="color:#776e71">    lng = PyInt_AS_LONG(obj);       \
+</span><span style="color:#776e71">  }             \
+</span><span style="color:#776e71">    else{       \
+</span><span style="color:#776e71">      Py_INCREF(Py_NotImplemented); \
+</span><span style="color:#776e71">      return Py_NotImplemented; \
+</span><span style="color:#776e71">    }       \
+</span><span style="color:#776e71">
+</span><span style="color:#776e71"></span><span style="color:#815ba4">static</span> PyObject<span style="color:#5bc4bf">*</span> int_add(PyIntObject <span style="color:#5bc4bf">*</span>v, PyIntObject <span style="color:#5bc4bf">*</span>w)
+{
+  <span style="color:#815ba4">register</span> <span style="color:#fec418">long</span> a, b, x;
+  CONVERT_TO_LONG(v, a);
+  CONVERT_TO_LONG(w, b);
+  x <span style="color:#5bc4bf">=</span> a <span style="color:#5bc4bf">+</span> b;
+  <span style="color:#776e71">//检查加法结果是否溢出
+</span><span style="color:#776e71"></span>  <span style="color:#815ba4">if</span> ((x<span style="color:#5bc4bf">^</span>a) <span style="color:#5bc4bf">&gt;=</span><span style="color:#f99b15">0</span> <span style="color:#5bc4bf">||</span> (x<span style="color:#5bc4bf">^</span>b) <span style="color:#5bc4bf">&gt;=</span><span style="color:#f99b15">0</span>)
+    <span style="color:#815ba4">return</span> PyInt_FromLong(x);
+  <span style="color:#815ba4">return</span> PyLong_TYPE.tp_as_number <span style="color:#5bc4bf">-&gt;</span> nb_add ((Pyobject <span style="color:#5bc4bf">*</span>)v, (PyObject <span style="color:#5bc4bf">*</span>)w);
+}
+</code></pre></div><h3 id="pyintobject对象的创建和维护">PyIntObject对象的创建和维护</h3>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">PyObject <span style="color:#5bc4bf">*</span>PyInt_FromLong(<span style="color:#fec418">long</span> ival)
+</code></pre></div><p>可以直接调用c api 从一个long值生成PyIntObject对象。</p>
+<h2 id="小整数对象">小整数对象</h2>
+<ul>
+<li>使用了对象池技术。[-5, 127)</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#776e71">#ifndef NSMALLPOSINTS
+</span><span style="color:#776e71"></span>    <span style="color:#776e71">#define NSMALLPOSINTS      257
+</span><span style="color:#776e71">#endif
+</span><span style="color:#776e71">#ifndef NSMALLNEGINTS
+</span><span style="color:#776e71"></span>    <span style="color:#776e71">#define NSMALLNEGINTS      5
+</span><span style="color:#776e71">#endif
+</span><span style="color:#776e71">#if NSMALLNEGINTS + NSMALLPOSINTS &gt; 0
+</span><span style="color:#776e71"></span>    <span style="color:#815ba4">static</span> PyIntObject <span style="color:#5bc4bf">*</span>small_ints[NSMALLNEGINTS <span style="color:#5bc4bf">+</span> NSMALLPOSINTS];
+<span style="color:#776e71">#endif
+</span></code></pre></div><h2 id="大整数对象">大整数对象</h2>
+<ul>
+<li>对于小整数，使用小整数对象池</li>
+<li>对于大整数，开辟一块内存空间轮流使用。</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#776e71">#define BLOCK_SIZE 1000     </span><span style="color:#776e71">/* 1k less tpyical malloc overhead */</span><span style="color:#776e71">
+</span><span style="color:#776e71">#define BHEAD_SIZE 8        </span><span style="color:#776e71">/* Enough for a 64-bit pointer */</span><span style="color:#776e71">
+</span><span style="color:#776e71">#define N_INTOBJECTS        ((BLOCK_SIZE - BHEAD_SIZE) / sizeof (PyIntObject))
+</span><span style="color:#776e71"></span>
+<span style="color:#815ba4">struct</span> _intblock {
+  <span style="color:#815ba4">struct</span> _intblock <span style="color:#5bc4bf">*</span>next;
+  PyIntObject ojects[N_INTOBJECTS];
+};
+
+<span style="color:#815ba4">typedef</span> <span style="color:#815ba4">struct</span> _intblock PyIntBlock;
+
+<span style="color:#815ba4">static</span> PyIntBlock <span style="color:#5bc4bf">*</span>block_list <span style="color:#5bc4bf">=</span> NULL;
+<span style="color:#815ba4">static</span> PyIntObject <span style="color:#5bc4bf">*</span>free_list <span style="color:#5bc4bf">=</span> NULL;
+</code></pre></div><ul>
+<li>PyIntBlock : 结构中维护了一块内存，其中保存了一些<code>PyIntObject</code>对象。</li>
+<li>每一个PyIntBlock中都维护了一个PyIntObject数组 &mdash; obejcts. N_INTOBJECTS 简单计算是82个。即<code>object[92]</code></li>
+<li>使用<code>free_list</code>表示指向空闲内存的单向链表表头。</li>
+</ul>
+<h2 id="添加和删除">添加和删除</h2>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">PyObject<span style="color:#5bc4bf">*</span> <span style="color:#06b6ef">PyInt_FromLong</span>(<span style="color:#fec418">long</span> ival)
+{
+  <span style="color:#815ba4">register</span> PyIntObject <span style="color:#5bc4bf">*</span>v;
+<span style="color:#776e71">#if NSMALLNEGINTS + NSMALLPOSINTS &gt; 0
+</span><span style="color:#776e71"></span>  <span style="color:#815ba4">if</span> (<span style="color:#5bc4bf">-</span>NSMALLNEGINTS <span style="color:#5bc4bf">&lt;=</span> ival <span style="color:#5bc4bf">&amp;&amp;</span> ival <span style="color:#5bc4bf">&lt;</span> NSMALLPOSINTS) {
+    v <span style="color:#5bc4bf">=</span> small_ints[ival <span style="color:#5bc4bf">+</span> NSMALLNEGINTS];
+    Py_INCREF(v);
+    <span style="color:#815ba4">return</span> (PyObject <span style="color:#5bc4bf">*</span>) v;
+  }
+<span style="color:#776e71">#endif
+</span><span style="color:#776e71"></span>  <span style="color:#815ba4">if</span> (free_list <span style="color:#5bc4bf">==</span> NULL) {
+    <span style="color:#815ba4">if</span> ((free_list <span style="color:#5bc4bf">==</span> fill_free_list()) <span style="color:#5bc4bf">==</span> NULL)
+      <span style="color:#815ba4">return</span> NULL;
+  }
+  v <span style="color:#5bc4bf">=</span> free_list;
+  free_list <span style="color:#5bc4bf">=</span> (PyIntObject <span style="color:#5bc4bf">*</span>) v <span style="color:#5bc4bf">-&gt;</span> ob_type;
+  PyObject_INIT(v, <span style="color:#5bc4bf">&amp;</span>PyInt_Type);
+  v <span style="color:#5bc4bf">-&gt;</span> ob_ival <span style="color:#5bc4bf">=</span> ival ;
+  <span style="color:#815ba4">return</span> (PyObject <span style="color:#5bc4bf">*</span>) v;
+}
+</code></pre></div><p>PyIntObject 对象的创建通过两步完成：</p>
+<ul>
+<li>如果小整数对象机制被激活，尝试使用小整数对象池；</li>
+</ul>
+<p>NSMALLNEGINTS + NSMALLPOSINTS &gt; 0 ,则小整数对象池机制被激活，对ival进行判断。是小整数则直接返回小整数对象池中的对应对象即可。</p>
+<ul>
+<li>如果不在小整数范围，则使用通用的整数对象池。</li>
+</ul>
+<p>只要<code>free_list</code>为<code>NULL</code>。就会调用<code>fill_free_list</code>.创建新的block。</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#815ba4">static</span> PyIntObject<span style="color:#5bc4bf">*</span> <span style="color:#06b6ef">fill_free_list</span>(<span style="color:#fec418">void</span>)
+{
+  PyIntObject <span style="color:#5bc4bf">*</span>p, <span style="color:#5bc4bf">*</span>q;
+  <span style="color:#776e71">// 申请大小为sizeof(PyIntBlock)的内存空间。链接到已有的block list 中
+</span><span style="color:#776e71"></span>  p <span style="color:#5bc4bf">=</span> (PyIntObject <span style="color:#5bc4bf">*</span>) PyMem_MALLOC(<span style="color:#815ba4">sizeof</span>(PyIntBlock));
+  ((PyIntBlock <span style="color:#5bc4bf">*</span>)p) <span style="color:#5bc4bf">-&gt;</span> next <span style="color:#5bc4bf">=</span> block_list ;
+  block_list <span style="color:#5bc4bf">=</span> (PyIntBlock <span style="color:#5bc4bf">*</span>)p;
+  <span style="color:#776e71">// 将PyIntBlock中的PyIntObject数组 --objects --转变为单向链表
+</span><span style="color:#776e71"></span>  p <span style="color:#5bc4bf">=</span> <span style="color:#5bc4bf">&amp;</span>((PyIntBlock <span style="color:#5bc4bf">*</span>)p) <span style="color:#5bc4bf">-&gt;</span> objects[<span style="color:#f99b15">0</span>];
+  q <span style="color:#5bc4bf">=</span> p <span style="color:#5bc4bf">+</span> N_INTOBJECTS;
+  <span style="color:#815ba4">while</span> (<span style="color:#5bc4bf">--</span>q <span style="color:#5bc4bf">&gt;</span>p)
+    q <span style="color:#5bc4bf">-&gt;</span> ob_type <span style="color:#5bc4bf">=</span> (<span style="color:#815ba4">struct</span> _typeobject <span style="color:#5bc4bf">*</span>)(q<span style="color:#5bc4bf">-</span><span style="color:#f99b15">1</span>);
+  q <span style="color:#5bc4bf">-&gt;</span>ob_type <span style="color:#5bc4bf">=</span> NULL;
+  <span style="color:#815ba4">return</span> p <span style="color:#5bc4bf">+</span> N_INTOBJECTS <span style="color:#5bc4bf">-</span><span style="color:#f99b15">1</span>;
+}
+</code></pre></div>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

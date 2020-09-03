@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo搭配gitpage on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/hugo%E6%90%AD%E9%85%8Dgitpage/</link>
+    <description>Recent content in hugo搭配gitpage on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 15 Dec 2017 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/hugo%E6%90%AD%E9%85%8Dgitpage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>转移静态BLOG</title>
+      <link>https://xerxesnopt.github.io/post/first/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/first/</guid>
+      <description>&lt;h2 id=&#34;转移原因&#34;&gt;转移原因&lt;/h2&gt;
+&lt;p&gt;由于考虑到平时写文档都是markdown
+使用django后台动态生成比较慢。而且github还有page服务。直接使用静态网站&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

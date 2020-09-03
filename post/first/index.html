@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>转移静态BLOG &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="转移静态BLOG">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/first/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>转移静态BLOG</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-12-15 13:06:01 &#43;0800 &#43;0800">2017-12-15</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e6%9d%82%e9%a1%b9">杂项</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/hugo%e6%90%ad%e9%85%8dgitpage">hugo搭配gitpage</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="转移原因">转移原因</h2>
+<p>由于考虑到平时写文档都是markdown
+使用django后台动态生成比较慢。而且github还有page服务。直接使用静态网站</p>
+<hr>
+<h2 id="选择hugo的原因">选择hugo的原因</h2>
+<p>谷歌当家的go语言编写的静态网站生成器,上手简单,速度比Jekyll快</p>
+<h2 id="搭建过程">搭建过程</h2>
+<ul>
+<li>
+<p>首先下载安装go。</p>
+<ol>
+<li>mac 直接brew,debian apt-get.</li>
+<li>其他系统参考github</li>
+</ol>
+</li>
+<li>
+<p>安装hugo。
+去官网下载即可</p>
+</li>
+<li>
+<p>上github创建page库</p>
+</li>
+<li>
+<p>选择hugo主题
+选个自己喜欢的即可</p>
+</li>
+<li>
+<p>配置config.toml文件
+直接按着主题的配置文件复制更改即可。</p>
+</li>
+</ul>
+<h2 id="自动build">自动build</h2>
+<p>搭建好githubpage后如果每次更新md文章还要自己手动build跟commit就太low了。
+按照官方文档，可以使用wercker进行自动build
+还有一个方法，使用github的webhook功能来进行自动化build(需要写脚本)</p>
+<ul>
+<li>编写<code>wercker.yml</code>文件进行配置。
+直接贴我自己的</li>
+</ul>
+<pre><code>box: debian
+build:
+    # Steps make up the actions in your pipeline
+    # Read more about steps on our dev center:
+    # http://devcenter.wercker.com/docs/steps/index.html
+  steps:
+    - arjen/hugo-build:
+        theme: hugo-strata-theme
+        flags: --buildDrafts=true
+
+deploy:
+    steps:
+        - install-packages:
+            packages: git ssh-client
+        - lukevivier/gh-pages@0.2.1:
+            token: $GIT_TOKEN
+            repo: xerxesnoPT/xerxesnoPT.github.io
+            branch: master
+            domain: xerxesnopt.github.io
+            basedir: public
+
+</code></pre><ul>
+<li>
+<p>注意：这里要配置GIT_TOKEN 在wercker环境变量中。</p>
+</li>
+<li>
+<p>上传<code>wercker.yml</code>到github库中.接下来配置wercker的工作流.顺序为先build在deploy.</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/6865906-c1d6b946726476f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-12-18 上午11.53.45.png"></p>
+<h2 id="完成">完成.</h2>
+<p>每次更新静态网站,新增博客只需commit到wercker关联仓库即可.会自动build然后上传到githubpage对应的仓库中.
+<img src="http://upload-images.jianshu.io/upload_images/6865906-55f13855639a3a04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-12-18 上午11.53.33.png">
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<img src="http://upload-images.jianshu.io/upload_images/6865906-c1e6ce3c377171a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="屏幕快照 2017-12-18 上午11.54.20.png"></p>
+<h2 id="附注">附注：</h2>
+<p>我选择的这个主题集成了nodejs的项目formspree.解决了静态网站收集表单信息的不便。
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<img src="http://upload-images.jianshu.io/upload_images/6865906-f91b42accf9bdc9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

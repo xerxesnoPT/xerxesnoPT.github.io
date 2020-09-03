@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/python/</link>
+    <description>Recent content in python on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 22 Jan 2018 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python-source-one</title>
+      <link>https://xerxesnopt.github.io/post/python-source_chapter-one/</link>
+      <pubDate>Mon, 22 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-source_chapter-one/</guid>
+      <description>&lt;h2 id=&#34;python所有的对象pyobject&#34;&gt;Python所有的对象PyObject&lt;/h2&gt;
+&lt;p&gt;[object.h]&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;color:#815ba4&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#815ba4&#34;&gt;struct&lt;/span&gt; _object {
+  PyObject_HEAD
+} PyObject;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>python-source-two</title>
+      <link>https://xerxesnopt.github.io/post/python-source_chapter_2/</link>
+      <pubDate>Mon, 22 Jan 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/python-source_chapter_2/</guid>
+      <description>&lt;h2 id=&#34;python中的整数对象&#34;&gt;Python中的整数对象&lt;/h2&gt;
+&lt;p&gt;python对象根据对象维护数据的可变现将对象分为“可变（mutable）”对象跟“不可变（immutable）”对象&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PyIntObject&lt;/code&gt; 对象就是一个不可变对象
+创建了一个&lt;code&gt;PyIntObject&lt;/code&gt;后，再也不能改变该对象的值了。（字符串对象也如此）&lt;/p&gt;
+&lt;p&gt;Python中为高效使用整数设置了整数对象池。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>迭代 on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/%E8%BF%AD%E4%BB%A3/</link>
+    <description>Recent content in 迭代 on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 15 Dec 2017 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/%E8%BF%AD%E4%BB%A3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python迭代</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-iter/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-iter/</guid>
+      <description>&lt;p&gt;Python中，所有的集合都可以迭代。在语言内部中，迭代器主要用于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;for循环&lt;/li&gt;
+&lt;li&gt;构建和扩展集合类型&lt;/li&gt;
+&lt;li&gt;逐行遍历文件文本&lt;/li&gt;
+&lt;li&gt;列表推导，字典推导跟集合推导&lt;/li&gt;
+&lt;li&gt;元组拆包&lt;/li&gt;
+&lt;li&gt;调用函数时，用__*__拆包实参&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

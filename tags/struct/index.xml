@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>struct on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/struct/</link>
+    <description>Recent content in struct on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 02 Feb 2018 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/struct/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据结构-二叉树</title>
+      <link>https://xerxesnopt.github.io/post/data_struct_tree/</link>
+      <pubDate>Fri, 02 Feb 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/data_struct_tree/</guid>
+      <description>&lt;h2 id=&#34;二叉树的性质&#34;&gt;二叉树的性质&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在二叉树的第i层上至多有&lt;code&gt;2**(i-1)&lt;/code&gt;个结点(i&amp;gt;=1).&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

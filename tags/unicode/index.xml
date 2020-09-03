@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Unicode on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/unicode/</link>
+    <description>Recent content in Unicode on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 15 Dec 2017 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/unicode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>python str/byte</title>
+      <link>https://xerxesnopt.github.io/post/fluent-python-unicode/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/fluent-python-unicode/</guid>
+      <description>&lt;h2 id=&#34;字符问题&#34;&gt;字符问题&lt;/h2&gt;
+&lt;p&gt;Unicode 标准把字符的标识和具体的字节表述进行了明确区分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字符的标识，即码位，是0-1114111的数字（十进制）&lt;/li&gt;
+&lt;li&gt;编码是在码位与字节序列之间转换时使用的算法。
+把码位转换为字节序列是编码，把字节序列转为码位是解码&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

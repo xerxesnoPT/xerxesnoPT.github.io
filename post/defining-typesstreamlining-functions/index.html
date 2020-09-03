@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>定义类型，方法 &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="定义类型，方法">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/defining-typesstreamlining-functions/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>定义类型，方法</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-11-02 13:06:01 &#43;0800 &#43;0800">2017-11-02</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/haskell">haskell</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/hl%e5%9f%ba%e7%a1%80%e8%af%ad%e6%b3%95">hl基础语法</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="定义新的数据类型">定义新的数据类型</h2>
+<p>使用<code>data</code>关键字可以定义新的数据类型</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#815ba4">data</span> <span style="color:#fec418">BookInfo</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">Book</span> <span style="color:#fec418">Int</span> <span style="color:#fec418">String</span> [<span style="color:#fec418">String</span>]
+                          <span style="color:#815ba4">deriving</span> (<span style="color:#fec418">Show</span>)
+</code></pre></div><p>上面代码中</p>
+<ul>
+<li>跟在<code>data</code>后的<code> BookInfo</code>就是新类型的名字,我们称<code>BookInfo</code>为类型构造器. 类型构造器指代(refer)类型.
+注意,类型的首字符必须大写,所以,类型构造器的首字母也必须大写.</li>
+<li>接下来的<code>Book</code>是值构造器(也称为数据构造器)的名字.类型的值就是由值构造器创建的.值构造器的首字母也必须大写</li>
+<li><code>Book</code>之后的<code>Int , String 和 [String]</code>是类型的组成部分.通常称为域。
+在上面的例子中，<code>Int</code>表示一本书的ID, <code>String</code>表示书名, <code>[String]</code>代表作者.
+<code>BookInfo</code>类型的结构跟(Int, String, [String])的三元组结构一样,但是他们的类型不同.
+可以将值构造器看作是一个函数 - 它创建并返回某个类型值.
+在ghci里定义变量需要使用<code>let</code>定义:</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#5bc4bf">*</span><span style="color:#fec418">Main</span><span style="color:#5bc4bf">&gt;</span> <span style="color:#815ba4">let</span> cities <span style="color:#5bc4bf">=</span> <span style="color:#fec418">Book</span> <span style="color:#f99b15">173</span> <span style="color:#48b685">&#34;Use of Weapons&#34;</span> [<span style="color:#48b685">&#34;Iain M. Banks&#34;</span>]
+</code></pre></div><h2 id="类型构造器和值构造器的命名">类型构造器和值构造器的命名</h2>
+<p>在Haskell里,类型的名字(类型构造器)跟值构造器的名字是相互独立的.类型构造器只能出现在类型的定义,或者类型签名中.而值构造器只能出现在实际的代码中.</p>
+<h2 id="类型别名">类型别名</h2>
+<p><code>type</code>关键字用于设置类型别名,其中新的类型名字在<code>=</code>号左边,已有类型放在右边.</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#815ba4">type</span> <span style="color:#fec418">CustomerID</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">Int</span>
+<span style="color:#815ba4">type</span> <span style="color:#fec418">ReviewBody</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">String</span>
+<span style="color:#815ba4">data</span> <span style="color:#fec418">BetterReview</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">BetterReview</span> <span style="color:#fec418">Bookinfo</span> <span style="color:#fec418">CustomerID</span> <span style="color:#fec418">ReviewBody</span>
+</code></pre></div><h2 id="代数数据类型">代数数据类型</h2>
+<p><code>Bool</code>类型是代数数据类型最常见的例子.一个代数类型可以有多于一个值构造器.</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#815ba4">data</span> <span style="color:#fec418">Bool</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">False</span> <span style="color:#5bc4bf">|</span> <span style="color:#fec418">True</span>
+</code></pre></div><p>使用多个值构造器时要指明值构造器的名字,并且传入对应的参数(参数个数跟类型)</p>
+<h2 id="何时用元组何时用代数数据类型">何时用元组,何时用代数数据类型.</h2>
+<p>代数数据类型使得我们可以自结构相同但类型不同的数据之间进行区分.然而,对应元组来说,只要元素的结构跟类型都一致,那么元组的类型就是相同的.</p>
+<h2 id="枚举">枚举</h2>
+<p>Haskell中的枚举。不可能使用枚举值来代替Int值</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#815ba4">data</span> <span style="color:#fec418">Roygbiv</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">Red</span>
+             <span style="color:#5bc4bf">|</span> <span style="color:#fec418">Orange</span>
+             <span style="color:#5bc4bf">|</span> <span style="color:#fec418">Yellow</span>
+             <span style="color:#5bc4bf">|</span> <span style="color:#fec418">Green</span>
+             <span style="color:#5bc4bf">|</span> <span style="color:#fec418">Blue</span>
+             <span style="color:#5bc4bf">|</span> <span style="color:#fec418">Indigo</span>
+             <span style="color:#5bc4bf">|</span> <span style="color:#fec418">Violet</span>
+               <span style="color:#815ba4">deriving</span> (<span style="color:#fec418">Eq</span>, <span style="color:#fec418">Show</span>)
+</code></pre></div><h2 id="模式匹配">模式匹配</h2>
+<p>对于某个类型的值来说，应该可以做到以下两点：</p>
+<ul>
+<li>如果这个类型的值构造器有多个，应该知道这个值是由哪个构造器创建的。</li>
+<li>如果一个值构造器包含不同的成分，那么应该有办法提取这些成分。
+模式匹配允许我们查看值的内部，并将值所包含的数据绑定到变量上。</li>
+</ul>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#06b6ef">myNot</span> <span style="color:#fec418">True</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">False</span>
+<span style="color:#06b6ef">myNot</span> <span style="color:#fec418">False</span> <span style="color:#5bc4bf">=</span> <span style="color:#fec418">True</span>
+</code></pre></div><p>这个自定义的函数通过模式匹配对Bool类型值进行了类似not函数的操作。</p>
+<h2 id="组成和解构">组成和解构</h2>
+<p>模式匹配的过程就像是逆转一个值的构造过程，因此它有时候也被称为解构。</p>
+<h2 id="记录语法">记录语法</h2>
+<p>可以看做跟python中的字典参数一样的存在。</p>
+<h2 id="参数化类型">参数化类型</h2>
+<p><code>Maybe</code>类型:既可以有值,也可以空缺.</p>
+<h2 id="递归类型">递归类型</h2>
+<p>列表这种常见的类型就是递归的:它用自己来定义自己.</p>
+<h2 id="let-语法">let 语法</h2>
+<p>let 语法用来引入局部变量。</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#06b6ef">lend</span> amount balance <span style="color:#5bc4bf">=</span> <span style="color:#815ba4">let</span> reserve   <span style="color:#5bc4bf">=</span> <span style="color:#f99b15">100</span>
+                          newBalance <span style="color:#5bc4bf">=</span> balance <span style="color:#5bc4bf">-</span> amount
+                      <span style="color:#815ba4">in</span> <span style="color:#815ba4">if</span> balance <span style="color:#5bc4bf">&lt;</span> reserve
+                         <span style="color:#815ba4">then</span> <span style="color:#fec418">Nothing</span>
+                         <span style="color:#815ba4">else</span> <span style="color:#fec418">Just</span> newBalance
+</code></pre></div><p>上面的代码中使用了<code>let</code>关键字标识一个变量声明区块的开始,用<code>in</code>关键字标识了这个区块的结束</p>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

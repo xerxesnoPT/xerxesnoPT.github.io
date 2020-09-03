@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>frp内网穿透 &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="frp内网穿透">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/frp/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>frp内网穿透</h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2018-04-09 13:06:01 &#43;0800 &#43;0800">2018-04-09</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e7%bd%91%e7%bb%9c">网络</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/%e5%86%85%e7%bd%91%e7%a9%bf%e9%80%8f">内网穿透</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="frp使用">frp使用</h2>
+<ul>
+<li>上篇文章中讲了使用ssh搭建隧道。git上面有一个go语言的开源项目frp。用来进行专业的内网穿透。</li>
+<li><a href="https://github.com/fatedier/frp">git地址</a>. 支持tcp，udp，http，https协议。</li>
+</ul>
+<h2 id="具体操作">具体操作</h2>
+<ul>
+<li>首先在我的公网主机A(debian7 64位)上下载frp的release版本。</li>
+</ul>
+<pre><code>wget https://github.com/fatedier/frp/releases/download/v0.16.1/frp_0.16.1_linux_amd64.tar.gz
+</code></pre><ul>
+<li>编写配置文件。这边注意到frp分为frps跟frpc。看名字就知道。A上使用server端.</li>
+</ul>
+<p>vim frps.ini</p>
+<pre><code>[common]
+bind_port = 7000 /这里表示绑定的端口
+dashboard_port = 7500 /这里的是frp网页服务的端口。
+dashboard_user = xxxx /frp网页服务的账号
+dashboard_pwd = xxxx  /..密码
+</code></pre><p>之后开启服务</p>
+<pre><code>./frps -c frps.ini
+</code></pre><ul>
+<li>
+<p>客户端（需要内网穿透）的主机B的设置。使用的是树莓派3b。</p>
+</li>
+<li>
+<p>下载arm版本的frp首先</p>
+</li>
+<li>
+<p>编写配置文件。此时使用的是frpc</p>
+</li>
+</ul>
+<p>vim frpc.ini</p>
+<pre><code>[common]
+server_addr = x.x.x.x /公网ip地址
+server_port = 7000  /公网主机A服务端绑定的端口7000
+
+[ssh]
+type = tcp /使用tcp。可以看下stcp。更加安全
+local_ip = 127.0.0.1  /本地ip映射
+local_port = 22 /ssh端口
+remote_port = 6000 /绑定到公网ip的端口
+use_compression = true
+</code></pre><p>开启服务</p>
+<pre><code>./frpc -c frpc.ini
+</code></pre><ul>
+<li>全部配置完成后，内网树莓派的22端口已经通过公网ip:6000转发出来了。进行ssh连接时只需要</li>
+</ul>
+<pre><code>ssh pi@公网ip -p 6000
+</code></pre><h2 id="后续操作">后续操作</h2>
+<ul>
+<li>A跟树莓派B再进行开机自启frp服务。编写下脚本就可以时刻控制内网中的树莓派了。</li>
+<li>可以通过访问公网ip:7500来进行网页浏览链接情况</li>
+<li>顺便记下服务器改时区。</li>
+</ul>
+<pre><code>rm /etc/localtime
+
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

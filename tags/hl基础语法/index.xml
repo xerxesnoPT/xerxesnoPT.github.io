@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hl基础语法 on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/hl%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</link>
+    <description>Recent content in hl基础语法 on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 03 Nov 2017 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/hl%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>类型和函数</title>
+      <link>https://xerxesnopt.github.io/post/type-and-func/</link>
+      <pubDate>Fri, 03 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/type-and-func/</guid>
+      <description>&lt;h2 id=&#34;haskell的类型系统&#34;&gt;Haskell的类型系统&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;强类型：类型转换必须显示使用类型转换函数。&lt;/li&gt;
+&lt;li&gt;静态：不是python这种动态语言。java这样的编译时期就能发现类型不正确的表达式。Haskell提供的typeclass机制提供了大部分动态类型的特点。&lt;/li&gt;
+&lt;li&gt;可以通过自动推导得出&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>typeclasses</title>
+      <link>https://xerxesnopt.github.io/post/basic-typeclasses/</link>
+      <pubDate>Thu, 02 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/basic-typeclasses/</guid>
+      <description>&lt;p&gt;typeclasses: haskell 中的相当于类型接口的基类。
+在检查&lt;code&gt;==&lt;/code&gt;方法时
+返回&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>定义类型，方法</title>
+      <link>https://xerxesnopt.github.io/post/defining-typesstreamlining-functions/</link>
+      <pubDate>Thu, 02 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/defining-typesstreamlining-functions/</guid>
+      <description>&lt;h2 id=&#34;定义新的数据类型&#34;&gt;定义新的数据类型&lt;/h2&gt;
+&lt;p&gt;使用&lt;code&gt;data&lt;/code&gt;关键字可以定义新的数据类型&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;color:#815ba4&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;BookInfo&lt;/span&gt; &lt;span style=&#34;color:#5bc4bf&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;Book&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;Int&lt;/span&gt; &lt;span style=&#34;color:#fec418&#34;&gt;String&lt;/span&gt; [&lt;span style=&#34;color:#fec418&#34;&gt;String&lt;/span&gt;]
+                          &lt;span style=&#34;color:#815ba4&#34;&gt;deriving&lt;/span&gt; (&lt;span style=&#34;color:#fec418&#34;&gt;Show&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>柯里化</title>
+      <link>https://xerxesnopt.github.io/post/curried-function/</link>
+      <pubDate>Wed, 01 Nov 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/curried-function/</guid>
+      <description>&lt;h2 id=&#34;柯里化&#34;&gt;柯里化&lt;/h2&gt;
+&lt;p&gt;haskell 趣学指南中在高阶函数这一章中提出了柯里化概念。
+举例&lt;code&gt;max&lt;/code&gt;函数
+首先看&lt;code&gt;max&lt;/code&gt;函数的类型&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

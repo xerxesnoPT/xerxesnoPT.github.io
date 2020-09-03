@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>asm-call,ret跟子程序  &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="asm-call,ret跟子程序 ">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/asm-chapter10/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>asm-call,ret跟子程序 </h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-12-24 13:06:01 &#43;0800 &#43;0800">2017-12-24</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e4%ba%8c%e8%bf%9b%e5%88%b6">二进制</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/asm">asm</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="ret">ret</h2>
+<p>two steps</p>
+<ol>
+<li>(ip)=((ss)*16+(sp))</li>
+<li>(sp)=(sp)+2
+like: pop ip</li>
+</ol>
+<h2 id="retf">retf</h2>
+<p>four steps</p>
+<ol>
+<li>(ip)=((ss)*16+(sp))</li>
+<li>(sp)=(sp)+2</li>
+<li>(cs)=((ss)*16+(sp))</li>
+<li>(sp)=(sp)+2</li>
+</ol>
+<p>like: pop ip
+pop cs</p>
+<h4 id="这两条指令主要是在函数调用后返回时候获取栈中保存的ip进行跳转回去">这两条指令主要是在函数调用后返回时候，获取栈中保存的ip。进行跳转回去。</h4>
+<h2 id="call">call</h2>
+<p>two steps</p>
+<ol>
+<li>(sp)=(sp)-2
+((ss)*16+(sp))=(ip)</li>
+<li>(ip)=(ip) + 16 位位移</li>
+</ol>
+<p>相当于：
+push ip
+jmp near ptr 标号</p>
+<h2 id="call-far-ptr-标号">call far ptr 标号</h2>
+<p>four steps</p>
+<ol>
+<li>(sp)=(sp)-2</li>
+<li>((ss)*16+(sp))=(cs)</li>
+<li>(sp)=(sp)-2</li>
+<li>((ss)*16+(sp))=(ip)</li>
+</ol>
+<p>相当于：
+push cs
+push ip
+jmp far ptr 标号</p>
+<h2 id="转移地址在寄存器中的call指令">转移地址在寄存器中的call指令</h2>
+<p>call 16位 reg
+与普通call相同。</p>
+<h2 id="转移地址在内存中的call指令">转移地址在内存中的call指令</h2>
+<p>两种格式</p>
+<ul>
+<li>call word ptr 内存单元地址，与普通call一样，push ip 即可</li>
+<li>call dword ptr 内存单元地址，相当于call far ptr</li>
+</ul>
+<h2 id="call和ret的配合使用">call和ret的配合使用</h2>
+<p>call 是把call之后的ip地址保存在栈中，通过ret来从栈中取出。然后继续运行</p>
+<h2 id="mul指令">mul指令</h2>
+<p>乘法指令- 要么都是8位，要么都是16位</p>
+<ul>
+<li>8位，一个默认放在AL中，另一个放在8位reg或者内存字节单位中，默认结果放在AX中</li>
+<li>16位，一个默认在AX中，另一个放在16位reg或者内存字单元中,结果高位默认在DX中，低位在AX中。</li>
+</ul>
+<h2 id="模块化程序设计">模块化程序设计。</h2>
+<p>字程序标准框架</p>
+<pre><code>子程序开始：子程序中使用的寄存器入栈
+            子程序内容
+            子程序中使用的寄存器出站
+            返回（ret，retf）
+</code></pre>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

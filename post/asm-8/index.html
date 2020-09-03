@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+
+<!-- 
+Strata by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>asm-记录01  &middot; xerxes blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="author" content="xerxes">
+		<meta name="description" content="personal blog">
+		<meta http-equiv="content-language" content="zh" />
+
+		
+		<meta name="og:site_name" content="xerxes blog">
+		<meta name="og:title" content="asm-记录01 ">
+		<meta name="og:url" content="https://xerxesnopt.github.io/post/asm-8/">
+		
+		<meta name="og:image" content="https://xerxesnopt.github.io/images/cat.jpeg">
+		
+		
+
+		<meta name="generator" content="Hugo 0.74.3" />
+
+		<!--[if lte IE 8]><script src='https://xerxesnopt.github.io/js/ie/html5shiv.js'></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://xerxesnopt.github.io/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="https://xerxesnopt.github.io//css/ie8.css"><![endif]-->
+
+		
+		
+
+
+	</head>
+
+	<body id="top">
+		<!-- Header -->
+<header id="header">
+	
+	<a href="https://xerxesnopt.github.io/" class="image avatar"><img src="https://xerxesnopt.github.io/images/cat.jpeg" alt="" /></a>
+	
+	
+		<h1><strong>I&rsquo;m xerxes</strong><!-- raw HTML omitted -->life is short, i use python<!-- raw HTML omitted --></h1>
+	
+
+	
+		<nav id="sidebar">
+			<ul>
+			
+				<li><a href="https://xerxesnopt.github.io/">HOME</a></li>
+			
+				<li><a href="https://xerxesnopt.github.io/post/">BLOG</a></li>
+			
+			</ul>
+		</nav>
+	
+</header>
+
+
+		<!-- Main -->
+		<div id="main">
+			
+	<span>
+		<h1>asm-记录01 </h1>
+
+		<i class="fa fa-calendar"></i>&nbsp;&nbsp;
+<time datetime="2017-12-01 13:06:01 &#43;0800 &#43;0800">2017-12-01</time>&nbsp;&nbsp;
+
+
+
+
+    
+    
+        <i class="fa fa-folder"></i>&nbsp;&nbsp;
+        
+        <a class="article-category-link" href="https://xerxesnopt.github.io/categories/%e4%ba%8c%e8%bf%9b%e5%88%b6">二进制</a>
+        
+        
+    
+
+
+
+   
+   
+       &nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;
+       
+       <a class="article-category-link" href="https://xerxesnopt.github.io/tags/asm">asm</a>
+       
+       
+   
+
+
+	</span>
+
+	<p>
+	    <h2 id="伪指令dd">伪指令dd</h2>
+<p>定义双字型数据。</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm">
+<span style="color:#06b6ef">data</span> <span style="color:#ef6155">segment</span>
+    <span style="color:#06b6ef">db</span> <span style="color:#f99b15">1</span>
+    <span style="color:#06b6ef">dw</span> <span style="color:#f99b15">1</span>
+    <span style="color:#06b6ef">dd</span> <span style="color:#f99b15">1</span>
+<span style="color:#06b6ef">data</span> <span style="color:#ef6155">ends</span>
+</code></pre></div><ul>
+<li>第一个数据为01h，1个字节 data:0</li>
+<li>第二个数据为0001h，2个字节 data:1</li>
+<li>第三个数据为0000 0001h，4个字节 data:3</li>
+</ul>
+<h2 id="dup">dup</h2>
+<p>用来进行数据的重复</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#06b6ef">data</span> <span style="color:#ef6155">segment</span>
+<span style="color:#06b6ef">db</span> <span style="color:#f99b15">3</span> <span style="color:#ef6155">dup</span> (<span style="color:#f99b15">0</span>) <span style="color:#776e71">;相当于定义了3个字节，db 0,0,0
+</span><span style="color:#776e71"></span><span style="color:#ef6155">db</span> <span style="color:#f99b15">3</span> <span style="color:#ef6155">dup</span> (<span style="color:#f99b15">0</span>,<span style="color:#f99b15">1</span>,<span style="color:#f99b15">2</span>) <span style="color:#776e71">;db 0,1,2,0,1,2,0,1,2
+</span><span style="color:#776e71"></span><span style="color:#ef6155">data</span> <span style="color:#ef6155">ends</span>
+</code></pre></div><h2 id="offset">offset</h2>
+<p>伪指令,取得标号的偏移地址</p>
+<div class="highlight"><pre style="color:#e7e9db;background-color:#2f1e2e;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-asm" data-lang="asm"><span style="color:#06b6ef">code</span> <span style="color:#ef6155">segment</span>
+start: <span style="color:#06b6ef">mov</span> <span style="color:#ef6155">ax</span>, <span style="color:#ef6155">offset</span> <span style="color:#ef6155">start</span> <span style="color:#776e71">;相当于mov ax,0
+</span><span style="color:#776e71"></span>    <span style="color:#ef6155">s</span>: <span style="color:#ef6155">mov</span> <span style="color:#ef6155">ax</span>, <span style="color:#ef6155">offset</span> <span style="color:#ef6155">s</span> <span style="color:#776e71">; 相当于mov ax ,3 因为start这段指令占用3个字节
+</span><span style="color:#776e71"></span><span style="color:#ef6155">code</span> <span style="color:#ef6155">ends</span>
+</code></pre></div><h2 id="jmp指令">jmp指令</h2>
+<p>无条件跳转，可只修改ip，也可同时修改cs跟ip</p>
+<h4 id="根据偏移位置的jmp只修改ip">根据偏移位置的jmp（只修改ip）</h4>
+<p><code>jmp short 标号</code></p>
+<ul>
+<li>实现的是段内短转移，ip修改范围为8位（-128~127）</li>
+</ul>
+<p><code>jmp near ptr 标号</code></p>
+<ul>
+<li>16位的ip位移(-32768~32767)</li>
+</ul>
+<p><code>jmp 16位reg</code></p>
+<ul>
+<li>与上一条相同</li>
+</ul>
+<p><code>jmp word ptr 内存单元地址（段内转移）</code></p>
+<ul>
+<li>与上相同</li>
+</ul>
+<h4 id="转移的目的地址在指令中的jmp指令同时修改ip跟cs">转移的目的地址在指令中的jmp指令（同时修改ip跟cs）</h4>
+<p><code>jmp far ptr 标号</code></p>
+<ul>
+<li>段间转移,远转移</li>
+</ul>
+<p><code>jmp dword ptr 内存单元地址（段间转移）</code></p>
+<ul>
+<li>（cs）=（内存单元地址+2） ; 高位存cs</li>
+<li>（ip）=（内存单元地址） ; 低位存ip</li>
+</ul>
+<h2 id="jcxz指令">jcxz指令</h2>
+<p>jcxz指令为有条件转移指令。所有的有条件转移指令都是短转移。
+ip 控制在八位（-128~127）之间。</p>
+<p><code>jcxz 标号</code></p>
+<ul>
+<li>如果(cx)=0,转移到标号处执行. (cx)!=0时,程序继续向下执行</li>
+<li>相当于<code>if((cx)==0) jmp short 标号</code></li>
+</ul>
+<h2 id="loop-指令">loop 指令</h2>
+<p>所有的循环指令都是短转移。对应修改ip 8位（-128~127）
+指令格式:
+<code>loop 标号</code></p>
+<ul>
+<li>(cx)=(cx)-1;</li>
+<li>如果 (cx)!=0,(ip)=(ip)+8位位移.</li>
+<li>如果(cx)==0,程序向下运行</li>
+<li>相当于<code>if((cx)!=0) jmp short 标号</code></li>
+</ul>
+	</p>
+
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xerxes-1" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+		</div>
+
+		<!-- Footer -->
+<footer id="footer">
+	<ul class="icons">
+		
+		
+		
+		
+		<li><a href="//github.com/xerxesnoPT" target="_blank" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		
+		
+		
+		
+		
+		
+		<li><a href="https://xerxesnopt.github.io/#contact-form" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		
+		
+		<li><a href="https://xerxesnopt.github.io/index.xml" class="icon fa-rss" type="application/rss+xml"><span class="label">RSS</span></a></li>
+		
+	</ul>
+
+	<ul class="copyright">
+		
+		<li>© John Doe</li>
+		
+		<li>Design: <a href="//html5up.net">HTML5 UP</a></li>
+		
+		<li>Images: xerxes</li>
+		
+	</ul>
+</footer>
+
+<!-- Scripts -->
+<script src="https://xerxesnopt.github.io/js/jquery.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/jquery.poptrox.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/skel.min.js"></script>
+<script src="https://xerxesnopt.github.io/js/util.js"></script>
+
+<script src="https://xerxesnopt.github.io/js/main.js"></script>
+
+
+
+
+
+	</body>
+</html>

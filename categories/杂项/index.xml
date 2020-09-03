@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>杂项 on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/categories/%E6%9D%82%E9%A1%B9/</link>
+    <description>Recent content in 杂项 on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Fri, 02 Mar 2018 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/categories/%E6%9D%82%E9%A1%B9/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>pandoc转换md</title>
+      <link>https://xerxesnopt.github.io/post/md_2_pdf/</link>
+      <pubDate>Fri, 02 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/md_2_pdf/</guid>
+      <description>&lt;h1 id=&#34;markdown-如何转为pdf打印&#34;&gt;markdown 如何转为pdf打印。&lt;/h1&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;直接使用pandoc这个haskell应用&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>转移静态BLOG</title>
+      <link>https://xerxesnopt.github.io/post/first/</link>
+      <pubDate>Fri, 15 Dec 2017 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/first/</guid>
+      <description>&lt;h2 id=&#34;转移原因&#34;&gt;转移原因&lt;/h2&gt;
+&lt;p&gt;由于考虑到平时写文档都是markdown
+使用django后台动态生成比较慢。而且github还有page服务。直接使用静态网站&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

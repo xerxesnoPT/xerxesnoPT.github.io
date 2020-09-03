@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>phone on xerxes blog</title>
+    <link>https://xerxesnopt.github.io/tags/phone/</link>
+    <description>Recent content in phone on xerxes blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <lastBuildDate>Mon, 05 Mar 2018 13:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://xerxesnopt.github.io/tags/phone/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>use Heimdall</title>
+      <link>https://xerxesnopt.github.io/post/use_heimdall/</link>
+      <pubDate>Mon, 05 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/use_heimdall/</guid>
+      <description>&lt;h2 id=&#34;下载heimdall&#34;&gt;下载heimdall。&lt;/h2&gt;
+&lt;p&gt;网页提供的版本为1.4.0，download pit的时候会出错。浪费了半天时间。
+解决方法直接去git拉取最新的1.4.2版本，自己编译下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>nethunter </title>
+      <link>https://xerxesnopt.github.io/post/nethunter/</link>
+      <pubDate>Thu, 01 Mar 2018 13:06:01 +0800</pubDate>
+      
+      <guid>https://xerxesnopt.github.io/post/nethunter/</guid>
+      <description>&lt;h1 id=&#34;todo刷入三星s5-nethunter&#34;&gt;TODO:刷入三星S5 nethunter&lt;/h1&gt;
+&lt;h2 id=&#34;准备步骤&#34;&gt;准备步骤：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;下载工具及所需rom：
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://wiki.lineageos.org/adb_fastboot_guide.html&#34;&gt;Linux安装&lt;code&gt;adb&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;下载s5的cm固件，使用kltechn版本的。&lt;a href=&#34;https://download.lineageos.org/kltechn&#34;&gt;下载链接&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;下载&lt;a href=&#34;http://glassechidna.com.au/heimdall/#downloads&#34;&gt;Heimdall套件&lt;/a&gt;来对三星设备进行recovery的刷入。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dl.twrp.me/kltechn/&#34;&gt;TWRP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://build.nethunter.com/nightly/3.15.4-20170101-0951/&#34;&gt;nethunter roma&lt;/a&gt; 注意，这里内核使用kltechn的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
